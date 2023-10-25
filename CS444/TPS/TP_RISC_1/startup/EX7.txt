@@ -1,0 +1,39 @@
+Exercie 7)
+ASM:
+	.globl main
+main:
+	addi a0, a0, 1
+	bne a0, a0, main
+end:
+	ret
+
+instructions:
+addi: FMT=I OPcode=0010011 func3=0x0 rd=a0(10) rs1=a0(10) imm=1
+bne: FMT=B OPcode=1100011 func3=0x1 rs1=a0(10) rs2=a0(10) imm=-4
+ret(jalr x0, x1, 0): FMT=I OPcode=1100111 func3=0x0 rd=x0 rs1=x1 imm=0 
+
+FMT:
+I: imm[11:0] | rs1 [5b] | funct3 [3b] | rd [5b] | opcode [7b]
+B: imm[12] | imm[10:5] | rs2 [5b] | rs1 [5b] | func3 [3b] | imm[4:1] imm [11] | opcode [7b]
+
+BitCode:
+
+addi: 000000000001 | 01010 | 000 | 01010 | 0010011
+addi= 00000000000101010000010100010011
+
+ret:  000000000000 | 00001 | 000 | 00000 | 1100111
+ret = 00000000000000001000000001100111
+
+bne:  1 | 111111 | 01010 | 01010 | 001 | 1110 | 1 | 1100011
+bne = 11111110101001010001111011100011
+
+HexCode:
+
+addi=0x00150513
+bne= 0xfea51ee3
+ret= 0x00008067
+
+
+
+
+

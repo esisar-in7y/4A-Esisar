@@ -1,0 +1,33 @@
+
+Objectifs du cours
+
+Dans le cadre d'un développement logiciel, être capable de :
+
+    analyser les besoins fonctionnels et non fonctionnels ;
+    proposer une spécification fonctionnelle répondant aux besoins ;
+    concevoir une architecture logicielle appropriée ;
+    mettre en œuvre les différentes étapes de test ;
+    organiser le processus de développement en adoptant un modèle de cycle de vie adapté ;
+    estimer la durée et l'effort nécessaire aux différentes étapes du développement.
+
+Contenu du cours
+
+    Introduction au Génie Logiciel : concepts, principes, méthodes et outils.
+    Modélisation avec UML :  cas d'utilisation, diagrammes de séquence, diagrammes d'états, ﻿diagrammes de classes et d'objets.
+    Ingénierie logicielle pour le développement logiciel.
+
+Evaluation
+
+N1=0.7*E1 + 0.3*TP
+N2=0,7*E2 + 0.3*TP
+
+E1 : Examen de session 1 : Écrit 1h30, document non autorisé, sans calculatrice
+E2 : Examen de session 2 : Écrit 1h30, document non autorisé, sans calculatrice
+TP : Projet
+Ressources humaines
+
+Responsable du cours : Stéphanie Chollet (stephanie.chollet@grenoble-inp.fr)
+
+Intervenant pour les cours et TDM : Stéphanie Chollet
+
+Intervenants pour les TD : Stéphanie Chollet et Olivier Montagner

@@ -1,0 +1,50 @@
+<project name="gumball-machine" basedir="." default="run">
+
+    <property name="srcdir" value="src"/>
+    <property name="builddir" value="build"/>
+    <property name="classesdir" value="${builddir}/classes"/>
+    <property name="jardir" value="${builddir}/jar"/>
+    <property name="docdir" value="doc"/>
+    <property name="lib" value="lib"/>
+	
+    <property name="MainClass" value="fr.esisar.gumball.GumballMachineTestDrive"/>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classesdir}"/>
+        <javac srcdir="${srcdir}" destdir="${classesdir}" includeantruntime="false">
+        	<classpath>
+        		<fileset dir="${lib}" includes="*.jar"/>
+        	</classpath>
+        </javac>
+    	<copy file="log4j2.xml" todir="${classesdir}"/>
+    </target>
+
+    <target name="package" depends="compile">
+        <mkdir dir="${jardir}"/>
+        <jar destfile="${jardir}/${ant.project.name}.jar"
+             basedir="${classesdir}">
+            <manifest>
+                <attribute name="Main-Class" value="${MainClass}"/>
+            </manifest>
+        	<zipgroupfileset dir="${lib}">
+        		<include name="**/log4j*.jar"/>
+        	</zipgroupfileset>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${builddir}"/>
+    </target>
+
+    <target name="run" depends="package">
+        <java jar="${jardir}/${ant.project.name}.jar" fork="true">
+    		<arg value="-Dlog4j.configurationFile=log4j2.xml"/>
+        </java>
+    </target>
+
+    <!-- Generate javadocs for current project into ${doc.dir} -->
+    <target name="doc" depends="compile" description="generate documentation">
+        <javadoc sourcepath="${srcdir}" destdir="${docdir}"/>
+    </target>
+
+</project>

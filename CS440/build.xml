@@ -1,0 +1,34 @@
+<project name="compile" basedir= ".">
+	<target name="compile" depends="clean">
+		<mkdir dir="build/classes"/>
+		<javac srcdir="src" destdir="build/classes" includeantruntime="false"/>
+	</target>
+	<target name="package" depends="compile">
+		<mkdir dir="build/jar"/>
+		<jar destfile="build/jar/composite-v10jar" basedir="build/classes"/>
+			<manifest>
+				<attribute name="Main-Class" value="fr.esisar.composite.Client"/>
+			</manifest>
+		<jar/>
+	</target>
+	<target name="run" depends="package">
+		<java jar="build/jar/composite-v10jar" fork="true" />
+	</target>
+	<target name="clean">
+		<delete dir="build" />
+	</target>	
+</project>
+
+<root>
+	<classes>
+		<fr>
+			<esisar>
+				<composite>
+				<composite/>
+			<esisar/>
+		<fr/>
+	<classes/>
+	<jar>
+	<jar/>
+<root/>
+

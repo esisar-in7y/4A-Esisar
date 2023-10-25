@@ -1,0 +1,15 @@
+[CS444] TP en autonomie et installations logiciels perso
+
+Bonjour,
+
+Pour le TP en autonomie de vendredi (dont le sujet sera sur Chamilo), vous aurez besoin d'un compilateur riscv ainsi qu'un simulateur, spike.  Ces logiciels sont déjà installés sur les machines Linux de TP "standard" (hors B141) En B141, ils sont installés sur l'image "Compilation".
+
+Si vous désirez utiliser vos machines personnelles (Linux), les instructions d'installation peuvent être trouvées sur le très bon tuto (vous avez plein d'alternatives, une fois que ça marche, il est inutile d'installer d'une deuxième manière) :
+
+https://forge.univ-lyon1.fr/matthieu.moy/mif08-2021/-/blob/main/INSTALL.md
+
+En vous souhaitant bonne réception;
+
+LG pour CS444
+
+PS : seules les personnes inscrites au cours reçoivent cette annonce, merci de dire à vos collègues de s'inscrire.

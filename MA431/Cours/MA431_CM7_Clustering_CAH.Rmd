@@ -1,0 +1,68 @@
+---
+title: "CM7_Clustering_CAH"
+author: "D Barcelo"
+date: '2022-10-20'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Les données : les iris
+```{r }
+library(datasets)
+head(iris) 
+summary(iris)
+```
+
+On observe 5 variables, deux sur les sépales, deux sur les pétales et une sur l'espèce (donc qualitative).
+Il y a 150 individus.
+
+## Représentation graphique
+
+```{r }
+library(ggplot2) # Cette librairie permet d'obtenir des graphiques plus soignés
+ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + geom_point()
+```
+
+## CAH
+```{r }
+petales<-iris[,3:4]
+dpetales<-dist(petales)
+dpetales
+```
+Calcul des distances
+```{r }
+cah.ward<-hclust(dpetales,method="ward.D2")
+plot(cah.ward)
+print(cah.ward$height)
+```
+Combien de classes doit-on créer ?
+
+```{r }
+rect.hclust(cah.ward,k=) #Préciser la valeur de k, le nombre de classes
+rect.hclust(cah.ward,k=) # Une autre valeur possible ?
+groupes.cah<-cutree(cah.ward,k=) # Préciser la valeur de k pour créer les clusters
+print(groupes.cah) # On affiche les groupes
+plot(petales,col=groupes.cah) # Représentation graphique
+```
+
+## Matrice de confusion
+```{r }
+table(groupes.cah, iris$Species)
+```
+Conclusion ?
+Est-ce normal de faire une matrice de confusion en clustering ?
+
+## Représentation graphique plus intéressante
+```{r }
+ggplot(iris, aes(Petal.Length, Petal.Width, color = iris$Species)) + 
+  geom_point(alpha = 0.4, size = 3.5) + geom_point(col = groupes.cah) #+ 
+#  scale_color_manual(values = c('black', 'red', 'green','yellow','pink'))
+```
+
+Conclusion ?
+
+Reprendre l'algorithme mais en changeant la méthode dans hclust. Indiquer method="average" (aussi possible centroid ou d'autres, consultez l'aide si besoin)
+Conclusion ?

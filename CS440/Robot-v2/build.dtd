@@ -1,0 +1,45 @@
+<!ELEMENT project (property+,target+)>
+<!ATTLIST project name NMTOKEN #REQUIRED>
+<!ATTLIST project basedir NMTOKEN #REQUIRED>
+<!ATTLIST project default NMTOKEN #REQUIRED>
+<!ELEMENT property EMPTY>
+<!ATTLIST property name NMTOKEN #REQUIRED>
+<!ATTLIST property value CDATA #REQUIRED>
+<!ELEMENT target (mkdir?,javac?,copy?,jar?,delete?,java?,javadoc?)>
+<!ATTLIST target name NMTOKEN #REQUIRED>
+<!ATTLIST target depends NMTOKEN #IMPLIED>
+<!ATTLIST target description CDATA #IMPLIED>
+<!ELEMENT mkdir EMPTY>
+<!ATTLIST mkdir dir CDATA #REQUIRED>
+<!ELEMENT javac (classpath)>
+<!ATTLIST javac srcdir CDATA #REQUIRED>
+<!ATTLIST javac destdir CDATA #REQUIRED>
+<!ATTLIST javac includeantruntime NMTOKEN #REQUIRED>
+<!ELEMENT classpath (fileset)>
+<!ELEMENT fileset EMPTY>
+<!ATTLIST fileset dir CDATA #REQUIRED>
+<!ATTLIST fileset includes CDATA #REQUIRED>
+<!ELEMENT copy EMPTY>
+<!ATTLIST copy file NMTOKEN #REQUIRED>
+<!ATTLIST copy todir CDATA #REQUIRED>
+<!ELEMENT jar (manifest,zipgroupfileset)>
+<!ATTLIST jar destfile CDATA #REQUIRED>
+<!ATTLIST jar basedir CDATA #REQUIRED>
+<!ELEMENT manifest (attribute)>
+<!ELEMENT attribute EMPTY>
+<!ATTLIST attribute name NMTOKEN #REQUIRED>
+<!ATTLIST attribute value CDATA #REQUIRED>
+<!ELEMENT zipgroupfileset (include)>
+<!ATTLIST zipgroupfileset dir CDATA #REQUIRED>
+<!ELEMENT include EMPTY>
+<!ATTLIST include name CDATA #REQUIRED>
+<!ELEMENT delete EMPTY>
+<!ATTLIST delete dir CDATA #REQUIRED>
+<!ELEMENT java (arg)>
+<!ATTLIST java jar CDATA #REQUIRED>
+<!ATTLIST java fork NMTOKEN #REQUIRED>
+<!ELEMENT arg EMPTY>
+<!ATTLIST arg value CDATA #REQUIRED>
+<!ELEMENT javadoc EMPTY>
+<!ATTLIST javadoc sourcepath CDATA #REQUIRED>
+<!ATTLIST javadoc destdir CDATA #REQUIRED>

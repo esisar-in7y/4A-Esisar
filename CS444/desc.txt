@@ -1,0 +1,32 @@
+Bienvenue dans la version 2022-23 du cours de compilation (CS444) !
+
+Vos enseignant·e·s sont cette année:
+
+    Christophe Deleuze (CM, TD, TP)
+    Laure Gonnord (CM, TD, TP)
+
+Ici vous trouverez transparents de cours, codes et documents variés de TD, ainsi que les énoncés pdf des TP (TDM).
+
+Les codes des  TPs sont sur git: https://gricad-gitlab.univ-grenoble-alpes.fr/gonnord/cs444-labs22
+
+TP en autonomie (non encadré) du 30/09 noté TDM-NE sur l'emploi du temps: le sujet s'appelle esisar_tp0.pdf et il est dans le répertoire de TP sur Chamilo. Le code fourni est dans le git, répertoire TP_RISCV. Vous pouvez réaliser le TP en binôme. 1 seul exercice est à rendre.
+
+
+
+________________________________________________
+# Onglet Description
+------------------------------------------------
+
+Plan du cours de Compilation :
+
+Les transparents du cours sont sur Chamilo/Documents
+
+  1. (31/08) intro + lexicale (CD)
+  2. (07/09) analyse syntaxique  (CD)
+  3. (09/09) suite analyse syntaxique (CD)
+  4. (20/09) Grammaires attribuées (CD)
+  5. (28/09) AST, typage (LG)
+  6. (05/10) Génération de code simple 3@  (LG)
+  7. (19/10) Représentations intermédiaires (LG)
+  8. (09/11) Allocation de registre (LG)
+  9. (23/11) Analyses flot de données (LG)

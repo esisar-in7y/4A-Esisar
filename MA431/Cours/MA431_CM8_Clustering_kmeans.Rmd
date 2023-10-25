@@ -1,0 +1,61 @@
+---
+title: "CM8_Clustering_kmeans_DBSCAN"
+author: "D Barcelo"
+date: '2022-10-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Les données : les iris
+```{r }
+library(datasets)
+head(iris) 
+library(ggplot2) # Cette librairie permet d'obtenir des graphiques plus soignés
+ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + geom_point()
+```
+On utilise les mêmes données pour comparer les techniques de clustering
+
+## kmeans
+```{r }
+petales<-iris[,3:4]
+groupes.kmeans<-kmeans(petales, centers= 3,nstart=20)  
+groupes.kmeans$cluster  
+```
+On obtient la classe affectée à chaque individu
+
+```{r }
+groupes.kmeans$withinss # Il s'agit de l'inertie intraclasse de chaque classe
+groupes.kmeans$tot.withinss  # Il s'agit de l'inertie intraclasse (totale)
+groupes.kmeans$betweenss # On obtient l'inertie interclasse
+groupes.kmeans$size # on obtient l'effectif de chaque classe.
+groupes.kmeans$betweenss/groupes.kmeans$totss
+```
+Le dernier calcul permet de calculer le pourcentage d'inertie conservée. C'est le rapport de l'inertie interclasse sur l'inertie totale.
+Ici, on obtient : 
+
+```{r }
+table(groupes.kmeans$cluster, iris$Species)
+```
+D'après la matrice de confusion, on a un taux d'erreurs de :
+
+```{r }
+ggplot(iris, aes(Petal.Length, Petal.Width, color = iris$Species)) + 
+  geom_point(alpha = 0.4, size = 3.5) + geom_point(col = groupes.kmeans$cluster)
+```
+
+## Choix de k dans les k-means
+```{r }
+inertie.expl<-rep(0,times=10)
+for(k in 1:10){
+  clus<-kmeans(petales,centers=k,nstart=20)
+  inertie.expl[k]<-clus$betweenss/clus$totss
+}
+plot(1:10,inertie.expl,type="b",xlab="Nb. de groupes", ylab="inertie expliquée")
+```
+
+
+ D'après le graphique, il est intéressant de choisir k= , voire k= .

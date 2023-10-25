@@ -1,0 +1,11 @@
+CC2 de 2021-22
+
+QCM et exercice simple de typage
+
+------------------------------------------------------------
+
+Examen (univ Lyon) 2017
+
+Le programme est le même, à part :
+*la partie "visiteurs" qui est remplacée dans CS444 par des grammaires attribuées
+*l'absence d'évaluation sur la construction du lexeur/parseur (cf autres annales à venir)

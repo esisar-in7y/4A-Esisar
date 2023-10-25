@@ -1,0 +1,12 @@
+Cours 2020-2021 sur l'outils de visioconférence de Chamilo.
+
+====================
+
+ 
+
+Cours 4eme année concernant le routage intra et inter domaine.
+
+Materiel pédagogique:
+
+    switch et routeurs cisco
+    marionnet

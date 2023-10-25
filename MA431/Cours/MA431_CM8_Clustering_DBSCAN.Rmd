@@ -1,0 +1,136 @@
+---
+title: "MA431_CM8_Clustering_DBSCAN"
+author: "D Barcelo"
+date: '2022-10-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Les données : les iris
+```{r }
+library(datasets)
+head(iris) 
+library(ggplot2) # Cette librairie permet d'obtenir des graphiques plus soignés
+ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + geom_point()
+```
+On utilise les mêmes données pour comparer les techniques de clustering
+
+## DBSCAN sur les iris
+
+```{r }
+library(dbscan)
+petales<-iris[,3:4]
+db <- dbscan(petales, eps = 1, minPts = 20)
+table(db$cluster)
+```
+On constate que :
+
+```{r }
+table(db$cluster, iris$Species)
+```
+Interprétation de la matrice de confusion
+
+```{r }
+ggplot(iris, aes(Petal.Length, Petal.Width, color = iris$Species)) + 
+  geom_point(alpha = 0.4, size = 3.5) + geom_point(col = db$cluster)
+```
+Ceci permet d'illustrer 
+
+Pour déterminer epsilon, on peut réaliser un graphique des distances entre les points :
+```{r}
+dbscan::kNNdist(petales,k=5 ,all=FALSE) # k représente ici Minpts, le nombre de voisins
+dbscan::kNNdistplot(petales,k=1 ,all=FALSE) # on utilise une distance des k plus proches voisins
+
+```
+On peut donc choisir Epsilon = 0.25
+
+```{r }
+library(dbscan)
+petales<-iris[,3:4]
+db <- dbscan(petales, eps = 0.25, minPts = 5)
+table(db$cluster, iris$Species)
+```
+
+
+## Comparaison des différents algorithmes de clustering : CAH, kmeans et DBSCAN
+
+### Les données
+
+```{r }
+library(factoextra)
+data("multishapes",package="factoextra")
+table(multishapes[,3])
+df<-multishapes[,1:2]
+m<-multishapes[,3]
+library(ggplot2)
+
+ggplot() +
+  geom_point(aes(df$x, df$y, col = multishapes[,3]))
+```
+Graphiquement, on observe des clusters très séparés.
+
+### DBSCAN
+
+```{r }
+library(dbscan)
+dbscan::kNNdist(df,k=5,all=FALSE)
+dbscan::kNNdistplot(df,k=5,all=FALSE)
+
+```
+On choisit epsilon et Minpts :
+
+```{r }
+k<-dbscan(df,eps= 0.15,minPts= 5)
+df2<- cbind(df, k$cluster)
+df2cluster <- factor(df2$`k$cluster`)
+ggplot() +
+  geom_point(aes(df2$x, df2$y, col = df2cluster))
+```
+Que peut-on dire du clustering avec Dbscan ?
+
+
+### kmeans
+
+```{r }
+inertie.expl<-rep(0,times=10)
+for(k in 1:10){
+  clus<-kmeans(df,centers=k,nstart=20)
+  inertie.expl[k]<-clus$betweenss/clus$totss
+}
+plot(1:10,inertie.expl,type="b",xlab="Nb. de groupes", ylab="inertie expliquée")
+```
+
+
+```{r }
+set.seed(123)
+km<-kmeans(df,centers= 6,nstart= 15)
+df3<- cbind(df, km$cluster)
+df3cluster <- factor(df3$`km$cluster`)
+ggplot() +
+  geom_point(aes(df3$x, df3$y, col = df3cluster))
+
+
+```
+Conclusion ?
+
+
+### CAH
+
+```{r }
+ddf<-dist(df)
+cahddf<-hclust(ddf,method="ward.D2")
+plot(cahddf)
+```
+
+```{r }
+cahclust<-cutree(cahddf,k= 5 )
+df4<- cbind(df, cahclust)
+df4cluster <- factor(df4$cahclust)
+ggplot() +
+  geom_point(aes(df4$x, df4$y, col =df4cluster))
+```
+
+Conclusion ?
