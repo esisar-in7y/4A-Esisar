@@ -1,0 +1,5 @@
+digraph "CFG for 'g' function" {
+	label="CFG for 'g' function";
+
+	Node0x5589d35ef0d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{%2:\l  %3 = icmp slt i32 %0, 0\l  %4 = icmp slt i32 %1, 1\l  %5 = or i1 %3, %4\l  %6 = add nuw nsw i32 %1, %0\l  %7 = select i1 %5, ptr @str.4, ptr @str\l  %8 = select i1 %5, i32 -1, i32 %6\l  %9 = tail call i32 @puts(ptr nonnull %7)\l  ret i32 %8\l}"];
+}
