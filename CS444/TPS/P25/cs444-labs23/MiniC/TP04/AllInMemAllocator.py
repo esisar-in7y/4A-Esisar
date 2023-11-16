@@ -23,6 +23,21 @@ class AllInMemAllocator(Allocator):
         # TODO (Exercise 7): is a temporary (e.g. isinstance(..., Temporary)),
         # TODO (Exercise 7): and if so, generate ld/sd accordingly. Replace the
         # TODO (Exercise 7): temporary with S[1], S[2] or S[3] physical registers.
+        # Iterate over old_args
+        i=0
+        for data in old_instr.used():
+            if isinstance(data,Temporary):
+                before.append(RiscV.ld( S[i+1], data.get_alloced_loc()))
+                subst[data] = S[i+1]
+                i=(i+1)%3
+        
+        #after
+        for data in old_instr.defined():
+            if isinstance(data,Temporary):
+                after.append(RiscV.sd( S[i+1], data.get_alloced_loc()))
+                subst[data] = S[i+1]
+                i=(i+1)%3
+        
         new_instr = old_instr.substitute(subst)
         return before + [new_instr] + after
 

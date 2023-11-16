@@ -170,14 +170,14 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
     def visitNotExpr(self, ctx) -> Operands.Temporary:
         # DONE
-        tmp1 = self.visit(ctx.expr(0))
+        tmp1 = self.visit(ctx.expr())
         dest = self._current_function.fdata.fresh_tmp()
-        self._current_function.add_instruction((RiscV.xor(dest, tmp1, Operands.Immediate(-1))))
+        self._current_function.add_instruction(RiscV.xor(dest, tmp1, Operands.Immediate(1)))
         return dest
 
     def visitUnaryMinusExpr(self, ctx) -> Operands.Temporary:
         #DONE
-        tmp1 = self.visit(ctx.expr(0))
+        tmp1 = self.visit(ctx.expr())
         dest = self._current_function.fdata.fresh_tmp()
         self._current_function.add_instruction((RiscV.sub(dest, Operands.ZERO, tmp1)))
         return dest
