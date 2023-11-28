@@ -1,0 +1,1 @@
+Main-Class: fr.esisar.calculatrice.Calculateur
