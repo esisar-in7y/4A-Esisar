@@ -1,21 +1,30 @@
 import sqlite3
-
-TABLE_NAME = 'Example'
-FIELDS = 'ID, FirstField, SecondField'
+import pygal
+import pygal.maps.fr 
 
 
 def main(db_name):
     with sqlite3.connect(db_name) as connection:
         cursor = connection.cursor()
-        if TABLE_NAME in (row[0] for row in
-                          cursor.execute('SELECT name FROM sqlite_master').fetchall()):
-            cursor.execute(f'DROP TABLE {TABLE_NAME}')
-        cursor.execute(f'CREATE TABLE {TABLE_NAME}({FIELDS})')
-        cursor.execute(f'INSERT INTO {TABLE_NAME}({FIELDS}) VALUES(?, ?, ?)',
-                       [1, '2', 3])
-        connection.commit()
-        for row in cursor.execute(f'SELECT * FROM {TABLE_NAME}'):
-            print(row)
+        fr_chart = pygal.maps.fr.Departments(human_readable=True)
+        fr_chart.title = 'consommation d’énergie '
+        for YEAR in range(2010,2023):
+            cursor.execute("""
+                SELECT Commune.codeDepartement, SUM(Consommation.Valeur) 
+                FROM Consommation 
+                inner join Releve ON Releve.idReleve=Consommation.idReleve
+                inner join Commune ON Commune.codeCommune=Releve.codeCommune
+                inner join Departement ON Departement.codeDepartement=Commune.codeDepartement
+                where Releve.annee=? AND typeId=0
+                GROUP BY Commune.codeDepartement
+                """,(YEAR,))
+
+            data = cursor.fetchall()
+            DICT = {depart:val for depart,val in data}
+            print(DICT)
+            fr_chart.add(f'In {YEAR}', DICT)
+        fr_chart.render_to_png("map.png")
+
 
 
 if __name__ == '__main__':
