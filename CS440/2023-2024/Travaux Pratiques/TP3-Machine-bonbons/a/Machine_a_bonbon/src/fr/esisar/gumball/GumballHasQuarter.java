@@ -17,7 +17,7 @@ public class GumballHasQuarter implements GumballMachineState {
 	public void turnCrank(GumballMachine gumballMachine) {
 		LOGGER.info("You turned...");
 		gumballMachine.setState(new GumballSold());
-		dispenseState(gumballMachine);
+		gumballMachine.getState().dispenseState(gumballMachine);
 	}
 
 	@Override

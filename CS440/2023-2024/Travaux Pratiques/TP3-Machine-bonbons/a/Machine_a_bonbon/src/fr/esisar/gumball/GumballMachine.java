@@ -127,7 +127,7 @@ public class GumballMachine {
 		result.append("\nMighty Gumball, Inc.");
 		result.append("\nJava-enabled Standing Gumball Model #2022\n");
 		result.append("Inventory: " + count + " gumball");
-		if (count <= 1) {
+		if (count > 1) {
 			result.append("s");
 		}
 		result.append("\nMachine is ");
