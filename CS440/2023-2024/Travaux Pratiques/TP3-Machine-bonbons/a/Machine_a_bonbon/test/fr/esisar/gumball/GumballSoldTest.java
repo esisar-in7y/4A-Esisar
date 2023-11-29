@@ -15,7 +15,6 @@ public class GumballSoldTest {
 		gm.setState(new GumballSold());
 	}
 
-	/* 0 Bonbons # # # # # # # # */
 	@Nested
 	@DisplayName("Tests for 0 bonbons")
 	class BonbonsX0 {
@@ -49,10 +48,9 @@ public class GumballSoldTest {
 		}
 	}
 
-	/* 5 Bonbons # # # # # # # # */
 	@Nested
 	@DisplayName("Tests for 5 bonbons")
-	class BonbonsX5 { /* Condition impossible, ca n'a pas de sens */
+	class BonbonsX5 { 
 		@BeforeEach
 		void beforeEach() {
 			gm.setCount(5);

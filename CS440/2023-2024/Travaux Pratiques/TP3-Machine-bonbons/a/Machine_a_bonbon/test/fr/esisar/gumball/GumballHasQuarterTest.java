@@ -16,7 +16,6 @@ public class GumballHasQuarterTest {
 		gm.setState(new GumballHasQuarter());
 	}
 
-	/* 5 Bonbons # # # # # # # # */
 	@Nested
 	@DisplayName("Tests pour 5 bonbons")
 	class BonbonsX5 {
@@ -50,7 +49,6 @@ public class GumballHasQuarterTest {
 		}
 	}
 
-	/* 1 Bonbon # # # # # # # # */
 	@Nested
 	@DisplayName("Tests pour 1 bonbon")
 	class BonbonsX1 {
@@ -84,10 +82,9 @@ public class GumballHasQuarterTest {
 		}
 	}
 
-	/* 0 Bonbons # # # # # # # # */
 	@Nested
 	@DisplayName("Tests pour 0 bonbon")
-	class BonbonsX0 { /* Condition impossible, ca n'a pas de sens */
+	class BonbonsX0 { 
 		@BeforeEach
 		void beforeEach() {
 			gm.setCount(0);
