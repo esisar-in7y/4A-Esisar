@@ -77,10 +77,8 @@ ORDER BY
     Consommation.valeur ASC
 LIMIT 18;
 
--- 3. Pour l’année 2019, quelles sont les 19 communes par la plus forte consommation
--- en gaz.
--- Donnez le code, le libellé, le code postal des communes ainsi que la valeur de la
--- consommation en question.
+-- 3. Pour l’année 2019, quelles sont les 19 communes par la plus forte consommation en gaz.
+-- Donnez le code, le libellé, le code postal des communes ainsi que la valeur de la consommation en question.
 -- Classez par consommation de gaz croissante.
 
 SELECT
@@ -97,8 +95,7 @@ WhERE Consommation."typeId" = 1
 ORDER BY valeur DESC
 LIMIT 19;
 
--- 4. Pour une commune que vous choisirez, quelle est la consommation d’électricité
--- au cours des années pour lesquelles vous avez des mesures.
+-- 4. Pour une commune que vous choisirez, quelle est la consommation d’électricité au cours des années pour lesquelles vous avez des mesures.
 
 SELECT
     Commune."codeCommune",
@@ -118,10 +115,8 @@ WHERE
     AND "type" = 1
 ORDER BY annee, "type" ASC;
 
--- 5. Pour l’année 2015, quelle est la consommation moyenne d’électricité par habi-
--- tants de chaque commune ?
--- Donnez le code, le libellé, le code postal des communes ainsi que la valeur de la
--- consommation en question.
+-- 5. Pour l’année 2015, quelle est la consommation moyenne d’électricité par habitants de chaque commune ?
+-- Donnez le code, le libellé, le code postal des communes ainsi que la valeur de la consommation en question.
 
 SELECT
     AVG(valeur) / nombreHabitants
@@ -133,11 +128,9 @@ WHERE
     annee = 2015
     AND type = "Électricité";
 
--- 7. Pour l’année 2017, pour un département que vous choisirez, quelle est la pro-
--- portion de la consommation d’électricité par rapport à la consommation totale ?
+-- 7. Pour l’année 2017, pour un département que vous choisirez, quelle est la proportion de la consommation d’électricité par rapport à la consommation totale ?
 -- Donnez le code, le libellé du département ainsi que la consommation demandée.
--- Donnez aussi le nombre de relevés de consommation d’électricité et le nombre
--- de relevés de consommation de gaz
+-- Donnez aussi le nombre de relevés de consommation d’électricité et le nombre de relevés de consommation de gaz
 
 SELECT (
         SELECT
@@ -159,8 +152,7 @@ FROM "Commune"
     INNER JOIN "Type" ON Consommation."typeId" = Type."typeId"
 WhERE libelle = "Issou";
 
--- 8. Pour l’année 2018, quelle est la proportion de consommation d’électricité de
--- chaque secteur ? Donnez le code, le libellé du département ainsi que les trois
+-- 8. Pour l’année 2018, quelle est la proportion de consommation d’électricité de chaque secteur ? Donnez le code, le libellé du département ainsi que les trois
 -- ratios demandés.
 
 SELECT
@@ -192,8 +184,7 @@ WHERE
     annee = 2018
 ORDER BY annee, "type" ASC;
 
--- 9. Qu’est-ce que l’indice qualité d’une consommation ? Comment sont les indice
--- qualités des consommations répartis entre les seuils 1, 0.9, 0.7, 0.5, 0.1 ?
+-- 9. Qu’est-ce que l’indice qualité d’une consommation ? Comment sont les indice qualités des consommations répartis entre les seuils 1, 0.9, 0.7, 0.5, 0.1 ?
 
 SELECT 
 count(CASE WHEN 1 > indiceQualite AND indiceQualite >= 0.9 THEN 1 ELSE null END) as "1-0.9",
@@ -203,8 +194,7 @@ count(CASE WHEN 0.5 > indiceQualite AND indiceQualite >= 0.1 THEN 1 ELSE null EN
 count(CASE WHEN 0.1 > indiceQualite THEN 1 ELSE null END) as "0.1-"
 FROM "Consommation"
 
--- 10. Reprenez les dernières questions en ne conservant que les consommation d’in-
--- dice qualité supérieur à un seuil que vous choisirez et dont vous argumenterez
+-- 10. Reprenez les dernières questions en ne conservant que les consommation d’indice qualité supérieur à un seuil que vous choisirez et dont vous argumenterez
 -- le choix. Les résultats changent-ils ?
 
 SELECT (
