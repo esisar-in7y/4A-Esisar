@@ -17,4 +17,22 @@ public class GumballSold implements GumballMachineState {
 		LOGGER.info("Turning twice doesn't get you another gumball!");
 	}
 
+	@Override
+	public void dispenseState(GumballMachine gumballMachine) {
+		LOGGER.info("A gumball comes rolling out the slot");
+		int count = gumballMachine.getCount();
+		if (count == 0) {
+			LOGGER.info("Oops, out of gumballs!");
+			gumballMachine.setState(new GumballSoldOut());
+		} else {
+			gumballMachine.setCount(count - 1);
+			gumballMachine.setState(new GumballNoQuarter());
+		}
+	}
+
+	@Override
+	public String toString(GumballMachine gumballMachine) {
+		return "delivering a gumball";
+	}
+
 }

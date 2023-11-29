@@ -1,14 +1,11 @@
 package fr.esisar.gumball;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class GumballNoQuarter implements GumballMachineState {
 
 	@Override
 	public void insertQuarter(GumballMachine gumballMachine) {
 		LOGGER.info("You inserted a quarter");
-		gumballMachine.setStateR(new GumballHasQuarter());
+		gumballMachine.setState(new GumballHasQuarter());
 	}
 
 	@Override
@@ -19,6 +16,16 @@ public class GumballNoQuarter implements GumballMachineState {
 	@Override
 	public void turnCrank(GumballMachine gumballMachine) {
 		LOGGER.info("You turned but there's no quarter");
+	}
+
+	@Override
+	public void dispenseState(GumballMachine gumballMachine) {
+		LOGGER.info("You need to pay first");
+	}
+
+	@Override
+	public String toString(GumballMachine gumballMachine) {
+		return "waiting for quarter";
 	}
 
 }

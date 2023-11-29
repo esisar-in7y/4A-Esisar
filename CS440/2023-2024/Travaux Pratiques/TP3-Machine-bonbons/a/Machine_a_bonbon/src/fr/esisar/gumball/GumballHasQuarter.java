@@ -10,14 +10,24 @@ public class GumballHasQuarter implements GumballMachineState {
 	@Override
 	public void ejectQuarter(GumballMachine gumballMachine) {
 		LOGGER.info("Quarter returned");
-		gumballMachine.setStateR(new GumballNoQuarter());
+		gumballMachine.setState(new GumballNoQuarter());
 	}
 
 	@Override
 	public void turnCrank(GumballMachine gumballMachine) {
 		LOGGER.info("You turned...");
-		gumballMachine.setStateR(new GumballSold());
-		gumballMachine.dispense();
+		gumballMachine.setState(new GumballSold());
+		dispenseState(gumballMachine);
+	}
+
+	@Override
+	public void dispenseState(GumballMachine gumballMachine) {
+		LOGGER.info("No gumball dispensed");
+	}
+
+	@Override
+	public String toString(GumballMachine gumballMachine) {
+		return "waiting for turn of crank";
 	}
 
 }

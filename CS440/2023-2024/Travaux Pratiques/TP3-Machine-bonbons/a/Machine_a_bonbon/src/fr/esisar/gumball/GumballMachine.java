@@ -24,43 +24,41 @@ public class GumballMachine {
 		}
 	}
 
-	public GumballMachineState getStateR() {
+	public static Logger getLogger() {
+		return LOGGER;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public GumballMachineState getState() {
 		return state;
 	}
 
-	public void setStateR(GumballMachineState state) {
+	public void setState(GumballMachineState state) {
 		this.state = state;
 	}
 
 	public void insertQuarter() {
-		
+		state.insertQuarter(this);
 	}
 
 	public void ejectQuarter() {
-		
+		state.ejectQuarter(this);
 	}
 
 	public void turnCrank() {
-		
+		state.turnCrank(this);
 	}
 
+	@SuppressWarnings("unused")
 	private void dispense() {
-		if (state == HAS_QUARTER) {
-			LOGGER.info("No gumball dispensed");
-		} else if (state == NO_QUARTER) {
-			LOGGER.info("You need to pay first");
-		} else if (state == SOLD) {
-			LOGGER.info("A gumball comes rolling out the slot");
-			if (count == 0) {
-				LOGGER.info("Oops, out of gumballs!");
-				state = SOLD_OUT;
-			} else {
-				count = count - 1;
-				state = NO_QUARTER;
-			}
-		} else if (state == SOLD_OUT) {
-			LOGGER.info("No gumball dispensed");
-		}
+		state.dispenseState(this);
 	}
 
 	@Override
@@ -73,15 +71,7 @@ public class GumballMachine {
 			result.append("s");
 		}
 		result.append("\nMachine is ");
-		if (state == HAS_QUARTER) {
-			result.append("waiting for turn of crank");
-		} else if (state == NO_QUARTER) {
-			result.append("waiting for quarter");
-		} else if (state == SOLD) {
-			result.append("delivering a gumball");
-		} else if (state == SOLD_OUT) {
-			result.append("sold out");
-		}
+		result.append(state.toString(this));
 		result.append("\n");
 		return result.toString();
 	}
