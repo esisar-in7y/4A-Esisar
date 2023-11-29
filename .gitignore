@@ -1,3 +1,5 @@
+.venv
+.vscode/*
 *.class
 
 # Byte-compiled / optimized / DLL files
