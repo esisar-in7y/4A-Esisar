@@ -2,7 +2,7 @@ from peewee import (SqliteDatabase, Model, TextField, AutoField, ForeignKeyField
                     IntegerField, FloatField)
 
 
-database = SqliteDatabase('example.db')
+database = SqliteDatabase('db-9.db')
 
 
 class BaseModel(Model):
@@ -37,8 +37,7 @@ class Departement(BaseModel):
 
 class Commune(BaseModel):
     code_commune = TextField(column_name='codeCommune', primary_key=True)
-    code_departement = ForeignKeyField(column_name='codeDepartement', field='code_departement',
-                                       model=Departement)
+    code_departement = ForeignKeyField(column_name='codeDepartement', field='code_departement',model=Departement)
     code_postal = IntegerField(column_name='codePostal')
     libelle = TextField()
 
@@ -64,7 +63,7 @@ class Operateur(BaseModel):
 
 class Releve(BaseModel):
     annee = IntegerField(null=True)
-    code_commune = ForeignKeyField(column_name='codeCommune', field='code_commune', model=Commune)
+    code_commune = ForeignKeyField(column_name='codeCommune', field='code_commune', model=Commune)#,backref='Releve')
     id_operateur = ForeignKeyField(column_name='idOperateur', field='id_operateur', model=Operateur)
     id_releve = AutoField(column_name='idReleve')
 
@@ -75,7 +74,7 @@ class Releve(BaseModel):
 class Consommation(BaseModel):
     categorie = ForeignKeyField(column_name='categorieId', field='categorie_id', model=Categorie)
     id_consommation = AutoField(column_name='idConsommation')
-    id_releve = ForeignKeyField(column_name='idReleve', field='id_releve', model=Releve, null=True)
+    id_releve = ForeignKeyField(column_name='idReleve', field='id_releve', model=Releve, null=True,backref='Releve')
     indice_qualite = FloatField(column_name='indiceQualite')
     pdl = IntegerField()
     type = ForeignKeyField(column_name='typeId', field='type_id', model=Type)
