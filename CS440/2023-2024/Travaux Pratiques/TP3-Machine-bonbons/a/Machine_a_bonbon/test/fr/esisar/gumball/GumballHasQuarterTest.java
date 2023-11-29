@@ -78,7 +78,7 @@ public class GumballHasQuarterTest {
 			gm.turnCrank();
 			assertEquals(0, gm.getCount());
 			assertEquals("\nMighty Gumball, Inc." + "\nJava-enabled Standing Gumball Model #2022\n"
-					+ "Inventory: 0 gumball\n" + "Machine is delivering a gumball\n", gm.toString());
+					+ "Inventory: 0 gumball\n" + "Machine is waiting for quarter\n", gm.toString());
 		}
 	}
 

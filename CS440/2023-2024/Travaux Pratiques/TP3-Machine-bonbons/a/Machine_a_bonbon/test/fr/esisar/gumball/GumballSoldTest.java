@@ -16,7 +16,7 @@ public class GumballSoldTest {
 	}
 
 	@Nested
-	@DisplayName("Tests for 0 bonbons")
+	@DisplayName("Tests pour 0 bonbons")
 	class BonbonsX0 {
 		@BeforeEach
 		void beforeEach() {
@@ -47,9 +47,42 @@ public class GumballSoldTest {
 					+ "Inventory: 0 gumball\n" + "Machine is delivering a gumball\n", gm.toString());
 		}
 	}
+	
+	@Nested
+	@DisplayName("Tests pour 1 bonbon")
+	class BonbonsX1 {
+		@BeforeEach
+		void beforeEach() {
+			gm.setCount(1);
+		}
+
+		@Test
+		void testInsert() {
+			gm.insertQuarter();
+			assertEquals(1, gm.getCount());
+			assertEquals("\nMighty Gumball, Inc.\n" + "Java-enabled Standing Gumball Model #2022\n"
+					+ "Inventory: 1 gumball\n" + "Machine is delivering a gumball\n", gm.toString());
+		}
+
+		@Test
+		void testEject() {
+			gm.ejectQuarter();
+			assertEquals(1, gm.getCount());
+			assertEquals("\nMighty Gumball, Inc.\n" + "Java-enabled Standing Gumball Model #2022\n"
+					+ "Inventory: 1 gumball\n" + "Machine is delivering a gumball\n", gm.toString());
+		}
+
+		@Test
+		void testTurnCrank() {
+			gm.turnCrank();
+			assertEquals(1, gm.getCount());
+			assertEquals("\nMighty Gumball, Inc.\n" + "Java-enabled Standing Gumball Model #2022\n"
+					+ "Inventory: 1 gumball\n" + "Machine is delivering a gumball\n", gm.toString());
+		}
+	}
 
 	@Nested
-	@DisplayName("Tests for 5 bonbons")
+	@DisplayName("Tests pour 5 bonbons")
 	class BonbonsX5 { 
 		@BeforeEach
 		void beforeEach() {
