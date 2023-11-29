@@ -12,55 +12,36 @@ public class GumballMachine {
 	static final int HAS_QUARTER = 2;
 	static final int SOLD = 3;
 
-	private int state = SOLD_OUT;
 	private int count = 0;
+
+	private GumballMachineState state = new GumballSoldOut();
 
 	public GumballMachine(int count) {
 		super();
 		this.count = count;
 		if (count > 0) {
-			state = NO_QUARTER;
+			state = new GumballNoQuarter();
 		}
+	}
+
+	public GumballMachineState getStateR() {
+		return state;
+	}
+
+	public void setStateR(GumballMachineState state) {
+		this.state = state;
 	}
 
 	public void insertQuarter() {
-		if (state == HAS_QUARTER) {
-			LOGGER.info("You can't insert another quarter");
-		} else if (state == NO_QUARTER) {
-			LOGGER.info("You inserted a quarter");
-			state = HAS_QUARTER;
-		} else if (state == SOLD) {
-			LOGGER.info("Please wait, we're already giving you a gumball");
-		} else if (state == SOLD_OUT) {
-			LOGGER.info("You can't insert a quarter, the machine is sold out");
-		}
+		
 	}
 
 	public void ejectQuarter() {
-		if (state == HAS_QUARTER) {
-			LOGGER.info("Quarter returned");
-			state = NO_QUARTER;
-		} else if (state == NO_QUARTER) {
-			LOGGER.info("You haven't inserted a quarter");
-		} else if (state == SOLD) {
-			LOGGER.info("Sorry, you already turned the crank");
-		} else if (state == SOLD_OUT) {
-			LOGGER.info("You can't eject, you haven't inserted a quarter yet");
-		}
+		
 	}
 
 	public void turnCrank() {
-		if (state == HAS_QUARTER) {
-			LOGGER.info("You turned...");
-			state = SOLD;
-			dispense();
-		} else if (state == NO_QUARTER) {
-			LOGGER.info("You turned but there's no quarter");
-		} else if (state == SOLD) {
-			LOGGER.info("Turning twice doesn't get you another gumball!");
-		} else if (state == SOLD_OUT) {
-			LOGGER.info("You turned, but there are no gumballs");
-		}
+		
 	}
 
 	private void dispense() {
