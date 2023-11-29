@@ -5,12 +5,13 @@ import random
 from pandas import *
 import pandas as pd
 import time
+import matplotlib.pyplot as plt
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 import pprint
 
-def matrix_generator(nb_datacenters):
+def matrix_generator(nb_datacenters = 7):
     if not nb_datacenters:
         nb_datacenters=random.randint(20,30)
     matrix=[]
@@ -32,12 +33,12 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def velo():#q7
+def centrale(n):
     # Create the model
     model = ConcreteModel('velo_problem')
     # Define the variables
     # Define the sets
-    matrix=matrix_generator(7)
+    matrix=matrix_generator(n)
     Datacenters=len(matrix[0])
     Centrales=len(matrix)
     for i in range(Datacenters):
@@ -77,8 +78,24 @@ def velo():#q7
         return -1
 
 start=time.time()
-for i in range(5):
-    velo()
+# for i in range(5):
+#     centrale(7)
+
+centrale(21)
 
 print("done in:",time.time()-start,"s")
-print("done in:",(time.time()-start)/5,"s")
+# print("done in:",(time.time()-start)/5,"s")
+
+# times = []
+
+# for nb_datacenters in range(2, 101):
+#    start = time.time()
+#    centrale(nb_datacenters)
+#    end = time.time()
+#    times.append(end - start)
+
+# plt.plot(range(2, 101), times)
+# plt.xlabel('Number of Datacenters')
+# plt.ylabel('Time (s)')
+# plt.title('Time Evolution with Increasing Number of Datacenters')
+# plt.show()

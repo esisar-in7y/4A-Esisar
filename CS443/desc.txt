@@ -1,8 +1,0 @@
-Cours de Bases de Données, version 2022-23
-
-    Les transparents de cours sont dans les documents. (CM par L. Gonnord)
-    les énoncés de TD sont distribués (TD L. Gonnord et N. Marcos)
-    les énoncés de TP sont sur un dépôt git: https://gricad-gitlab.univ-grenoble-alpes.fr/gonnord/cs443-lab 
-(git clone avec https dans les salles de TP linux)
-
-- vous ferez attention à bien travailler en local puis sauvegarder dans votre répertoire Documents_distants/  
