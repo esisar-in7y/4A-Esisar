@@ -1,0 +1,482 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>NE441</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<!-- <link rel="stylesheet" href="lib/css/mermaid.forest.css">-->
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				
+
+
+<div><h2> Cours NE441</h2></div>
+
+<div><h3> L'appel de procédures à distance (RPC) </h3></div>
+
+</section><section>
+
+<div><h2> 1 - Le concept RPC</h2></div>
+
+<div><h2> RPC : Remote Procedure Call</h2></div>
+
+</section><section>
+
+<p>Le mécanisme RPC permet à une application de faire appel à une procédure d&#39;une autre application, généralement située sur une machine distante.</p>
+
+<p>Illustrons ce mécanisme à l&#39;aide d&#39;un exemple avec l&#39;appel de procédure classique au sein d&#39;une unique application :</p>
+
+</section><section>
+
+<pre><code class="hljs" data-trim>public class Exemple
+{
+	public int addition(int nb1, int nb2)
+	{
+		return nb1+nb2 ;
+	}
+
+	public static void main(String[] args)
+	{
+		Exemple ex = new Exemple() ;
+		System.out.println(« res= »+ex.addition(3,5)) ;
+	}
+}</code></pre>
+
+</section><section>
+
+<p>Dans cet exemple :</p>
+<ul><li> le programme débute au niveau de la procédure principale (le main )</li>
+<li> l'execution est transmise à la procédure addition invoqué dans la procédure principale </li>
+<li> le code de la procédure addition se déroule et l'exécution revient au niveau de la procédure principale </li>
+<li> l'application s'achève </li></ul>
+
+</section><section>
+
+<p>Pour faire évoluer ce modèle d&#39;invocation vers le mécanisme RPC, il faut disposer de deux applications :</p>
+<ul><li> l'application qui contient la fonction addition, le service, qui est donc l'application serveur</li>
+<li> l'application qui appelle la fonction addition, l'application cliente </li></ul>
+
+</section><section>
+
+<img src="01.png" />
+
+</section><section>
+
+
+<p>Désormais, le fonctionnement sera le suivant :</p>
+<ul><li> le programme client début par la fonction main</li>
+<li> un appel de procédure distante est effectué (ex.addition), cet appel est transmis à la souche </li>
+<li> la souche transmet la demande au skeleton, avec les paramètres demandés (ici 3 et 5)</li>
+<li> le skeleton réceptionne la demande, puis  invoque la méthode sur le serveur avec les paramètres demandés</li>
+<li> le skeleton réceptionne le retour de la méthode, puis les transmet à la souche </li>
+<li> la souche retourne les résultats à l'application cliente </li></ul>
+
+</section><section>
+
+<p>Il faut noter les choix suivants :</p>
+<ul><li> on conserve la sémantique d'appel de fonction à une procédure locale</li>
+<li> le fonctionnement est synchrone</li>
+<li> la communication est transparente entre le client et le serveur</li></ul>
+
+</section><section>
+
+<p>Détails des tâches réalisées par la souche :</p>
+<ul><li> sérialisation des paramètres</li>
+<li> appel du serveur avec les paramètres sérialisés et le nom de la méthode à invoquer</li>
+<li> attente du résultat</li>
+<li> lecture du résultat, désérialisation et retour vers le client </li></ul>
+<p>    </p>
+</section><section>
+
+<p>Détails des tâches réalisées par le skeleton:</p>
+<ul><li> attente d'une demande d'un client</li>
+<li> désérialisation des paramètres reçus</li>
+<li> appel de la procédure demandée et attente du résultat</li>
+<li> sérialisation le résultat </li>
+<li> envoi du résultat vers le client</li></ul>
+
+</section><section>
+
+<p>L&#39;un des principaux problèmes est la sérialisation/désérialisation: il faut pouvoir gérer différentes machines (OS différents, big et little endian), différents langages (C++, Java, …), …</p>
+
+</section><section>
+
+<div><h2> - 2 - La sérialisation/désérialisation des données.</h2></div>
+
+</section><section>
+
+<div><h2> 2.1  Définition.</h2></div>
+
+<p>La sérialisation des données consiste à transformer un ensemble complexe de paramètres en un flux d&#39;octets qui pourra être transporté d&#39;une machine A vers une machine B, ou sauvegardé dans un fichier.</p>
+
+</section><section>
+
+<p>Autres termes :</p>
+<ul><li> marshalling : sérialisation</li>
+<li> unmarshalling : désérialisation </li></ul>
+
+</section><section>
+
+<p>On distingue deux types de sérialisation :</p>
+<ul><li> le flux sérialisé est auto descriptif : le flux contient à la fois les données et les méta données.</li>
+<li> le flux sérialisé n'est pas auto descriptif : le flux contient uniquement les données</li></ul>
+
+</section><section>
+<p>Dans le cas auto descriptif, la consommation d&#39;espace est plus importante, mais la désérialisation est plus facile à réaliser.</p>
+
+</section><section>
+<p>Dans la suite, nous allons voir les techniques élémentaires de sérialisation pour  les codage des champs de bases</p>
+
+</section><section>
+
+<div><h2> 2.2  Le codage binaire en champs de taille fixe</h2></div>
+
+<pre><code class="hljs" data-trim>Exemple : addition(int a, int b)</code></pre>
+
+
+<img src="02.png" />
+
+<p>Sérialization : écriture de 4 octets pour A, 4 octets pour B </p>
+<p>Désérialisation : lecture en sens inverse</p>
+<p>Problème potentiel : endianness</p>
+
+</section><section>
+
+<pre><code class="hljs" data-trim>Exemple : saveContact(String nom, String prenom)</code></pre>
+
+<p>Le nom et le prenom sont supposés être sur 32 caractères, donc transmission de 64 octets avec par exemple des espaces ou des \0 à la fin </p>
+
+<p>JEANxxxxxxxxxxxxxxxxxDUPONTxxxxxxxxxxxxxxxxxxx</p>
+
+<p>Exemple de cas d&#39;utilisation : driver de base de données</p>
+
+</section><section>
+
+<div><h2> 2.3  Le codage textuel avec l'aide de séparateurs</h2></div>
+
+<pre><code class="hljs" data-trim>Exemple : addition(int a, int b)</code></pre>
+
+<p>Dans ce cas, on peut utiliser des séparateurs comme un espace :</p>
+
+<p>12 espace 3 espace </p>
+
+</section><section>
+
+<pre><code class="hljs" data-trim>Exemple : validerContact(String nom, String prenom)</code></pre>
+
+<p>Dans ce cas, le séparateur est difficile à choisir : il existe toujours un risque que celui ci soit présent dans les chaînes nom ou prénom</p>
+
+</section><section>
+
+<div><h2> 2.4  Le codage TLV</h2></div>
+
+<p>TLV : Type Length Value </p>
+
+<p>Dans ce format, on transmet le type de la variable sur un octet, la longueur de la variable sur 4 octets et sa valeur sur</p>
+
+</section><section>
+
+<pre><code class="hljs" data-trim>Exemple : validerContact(String nom, String prenom, int age)</code></pre>
+
+<p>S 0004 JEAN S 0006 DUPONT I 0002 23</p>
+
+<p>Exemple d&#39;utilisation : SNMP</p>
+
+</section><section>
+
+<div><h2> 2.5  Le codage JSON</h2></div>
+
+<p>Exemple</p>
+
+<pre><code class="hljs" data-trim>{&quot;menu&quot;: {
+  &quot;id&quot;: &quot;file&quot;,
+  &quot;value&quot;: &quot;File&quot;,
+  &quot;popup&quot;: {
+    &quot;menuitem&quot;: [
+      {&quot;value&quot;: &quot;New&quot;, &quot;onclick&quot;: &quot;CreateNewDoc()&quot;},
+      {&quot;value&quot;: &quot;Open&quot;, &quot;onclick&quot;: &quot;OpenDoc()&quot;},
+      {&quot;value&quot;: &quot;Close&quot;, &quot;onclick&quot;: &quot;CloseDoc()&quot;}
+    ]
+  }
+}}
+</code></pre>
+</section><section>
+
+<p>Par contre, le développeur devra bien veiller à échapper les caractères interdits dans les chaînes (en particulier les « )</p>
+
+</section><section>
+
+<div><h2> 2.6  Le codage XML</h2></div>
+
+<p>Dans ce cas, nous utiliserons la notation classique avec les balises XML</p>
+
+<pre><code class="hljs" data-trim>&lt;menu id=&quot;file&quot; value=&quot;File&quot;&gt;
+  &lt;popup&gt;
+    &lt;menuitem value=&quot;New&quot; onclick=&quot;CreateNewDoc()&quot; /&gt;
+    &lt;menuitem value=&quot;Open&quot; onclick=&quot;OpenDoc()&quot; /&gt;
+    &lt;menuitem value=&quot;Close&quot; onclick=&quot;CloseDoc()&quot; /&gt;
+  &lt;/popup&gt;
+&lt;/menu&gt;</code></pre>
+
+</section><section>
+
+<p>Par contre, le développeur devra bien veiller à échapper les caractères interdits dans les chaînes nom et prénom (en particulier les chevrons).</p>
+
+</section><section>
+<div><h2> 3  - Sérialisation : gestion des structures complexes ou des objets</h2></div>
+
+</section><section>
+
+<div><h2> - 3.1  Le cas standard</h2></div>
+
+<p>Considérons la classe</p>
+
+<pre><code class="hljs" data-trim>public class Droite
+{
+	int x1 ;
+	int y1 ;
+
+	int x2 ;
+	int y2 ;
+}</code></pre>
+
+</section><section>
+
+<p>et la méthode distante </p>
+
+<pre><code class="hljs" data-trim>isParallele(Droite d1, Droite d2)</code></pre>
+
+<p>Pour la sérialisation de l&#39;objet, il suffit de sérialiser les champs dans l&#39;ordre de la classe </p>
+
+<p>x1 y1 x2 y2, en utilisant une des techniques élémentaires vues auparavant </p>
+
+</section><section>
+
+<div><h2> 3.2  La gestion des pointeurs ou des références entre objets</h2></div>
+
+<p>Considérons une liste chaînée contenant des personnes</p>
+
+<img src="03.png">
+
+</section><section>
+
+<pre><code class="hljs" data-trim>struct Person
+{
+	char * firstname ;
+	char * lastname ;
+	int age ;
+	struct Person * next ;
+} ;</code></pre>
+
+</section><section>
+
+<p>et la fonction </p>
+
+<pre><code class="hljs" data-trim>int sommeDesAges(struct Personn * list)</code></pre>
+
+<p>La sérialisation doit être alors récursive : </p>
+<ul><li> il faut indiquer les champs nom, prenom, age</li>
+<li> ensuite, il ne pas mettre la valeur du pointeur, mais l'objet au complet </li></ul>
+
+</section><section>
+
+<p>Par contre dans le cas de la fonction </p>
+
+<p>boolean sameAge(struct Personn * p1, struct Personn * p2)</p>
+
+<p>La sérialisation récursive sur la  valeur next n&#39;est pas optimale : on transmet complètement la liste deux fois.</p>
+
+</section><section>
+
+<p>Considérons un autre exemple avec une liste doublement chaînée : </p>
+
+<pre><code class="hljs" data-trim>struct Person
+{
+	char * firstname ;
+	char * lastname ;
+	int age ;
+	struct Person * previous;
+	struct Person * next ;
+	
+} ;
+</code></pre>
+</section><section>
+
+<img src="04.png" />	
+
+</section><section>
+<p>et la fonction </p>
+
+<pre><code class="hljs" data-trim>int sommeDesAges(struct Personn * list)</code></pre>
+
+
+<p>La sérialisation récursive des deux valeurs (next et previous) aboutit à une boucle infinie dans le programme</p>
+<p>Le problème est identique avec les références croisées.</p>
+
+<p>Il existe une solution dans le monde objet : la sérialisation binaire native (voir paragraphe suivant).</p>
+
+</section><section>
+
+<div><h2> Les frameworks de sérialisation</h2></div>
+
+<div><h2> 4.1  Introduction</h2></div>
+
+<p>Un framework de sérialisation apporte les outils nécessaires pour sérializer et désérializer des structures complexes. Une tel framework peut être :</p>
+<ul><li> mono langage ou multi langage</li>
+<li> avec ou sans langage de spécification de donnée (ou fichier IDL).</li></ul>
+
+</section><section>
+
+<div><h2>  4.2  Protobuf</h2></div>
+
+<p>Protocol Buffers est une technologie de serialisation développée par Google, multi langage. Google utilise Protocol Buffers la quasi-totalité de ses protocoles RPC internes et formats de fichiers.</p>
+
+</section><section>
+
+<p>You write a .proto file like this:</p>
+
+<pre><code class="hljs" data-trim>message Person {
+  required int32 id = 1;
+  required string name = 2;
+  optional string email = 3;
+}</code></pre>
+<p>Then you compile it with protoc, the protocol buffer compiler, to produce code in C++, Java, or Python.</p>
+
+</section><section>
+
+<div><h2> 4.3  La sérialisation binaire native en Java (ou autre langage orienté Objet)</h2></div>
+
+<p>Le langage Java propose un mécanisme natif pour la sérialisation des objets. Ce mécanisme conserve la liste de tous les objets qui ont été sérialisés et attribue pour chacun un numéro.</p>
+<p>Un même objet n&#39;est jamais sérialisé deux fois.</p>
+
+</section><section>
+
+<div><h2> 4.4  La sérialisation XML ou JSON en Java</h2></div>
+
+<p>JSON est un format concurrent (ou complémentaire) à XML. Lisez la RFC associée :</p>
+<p>http://tools.ietf.org/html/rfc4627</p>
+
+<p>AJAX : Asynchronous JavaScript and XML</p>
+<p>AJAJ ?</p>
+
+</section><section>
+
+<div><h2> 5 Les frameworks RPC.</h2></div>
+
+<p>Un framework RPC contient :</p>
+<ul><li> un framework de sérialisation</li>
+<li> des outils pour générer le stub et le skeleton</li></ul>
+<p>     </p>
+<p>Un framework RPC peut être :</p>
+<ul><li> mono langage ou multi langage</li>
+<li> avec génération de code ou dynamique </li></ul>
+
+</section><section>
+
+<div><h2> 5.1  JAVA RMI</h2></div>
+
+<p>RMI est un framework RPC développé en 1999.</p>
+<p>Il se révèle très lourd à l&#39;usage, il est aujourd&#39;hui peu utilisé. Il est basé sur la sérialisation JAVA.</p>
+
+</section><section>
+
+<div><h2> 5.2  Les Web Services de type REST</h2></div>
+
+
+<img src="05.png">
+
+<p>REST est basé sur le protocole HTTP</p>
+<p>Les paramètres d&#39;entrée du service sont compris dans l&#39;URL</p>
+<p>Le retour est dans un format JSON ou XML</p>
+
+</section><section>
+
+<p>Exemple 1 : le service REST de wikipedia </p>
+
+<pre><code class="hljs" data-trim>https://fr.wikipedia.org/w/api.php?action=query&amp;titles=Mars&amp;prop=extracts&amp;exchars=500&amp;explaintext&amp;utf8&amp;format=json</code></pre>
+
+</section><section>
+
+<p>Résultat : </p>
+
+<pre><code class="hljs" data-trim>{&quot;batchcomplete&quot;:&quot;&quot;,
+&quot;query&quot;:{&quot;pages&quot;:{&quot;1962&quot;:{&quot;pageid&quot;:1962,&quot;ns&quot;:0,&quot;title&quot;:&quot;Mars&quot;,
+&quot;extract&quot;:&quot;Mars est originellement le nom du dieu de la guerre dans la mythologie romaine. De cela proviennent plusieurs noms :\n\nplanète Mars, quatrième planète du système solaire.\nmois de mars, troisième mois de l&#39;année dans les calendriers occidentaux.Mars peut aussi faire référence à :\n\n\n== Anthroponyme ==\n\n\n=== Prénom ===\nMars de Nantes (VIe siècle), évêque de Nantes ;\nMars de Royat ou Martius (c. 527), ermite puis abbé à Royat ;\nMars Di Bartolomeo (1952 - ), homme politique luxembourgeois,\nMars Simard, fondateur…&quot;}}}}</code></pre>
+
+</section><section>
+<p>Exemple 2: Google Map Web Services</p>
+<p> </p>
+<p>Le retour est dans un format JSON ou XML</p>
+
+</section><section>
+
+<div><h2> 5.3  GRPC</h2></div>
+
+<p>gRPC est un framework RPC (Remote procedure call) open source initialement développé par Google. Il utilise le protocole HTTP/1.1 ou HTTP/2 pour le transport, Protocol Buffers comme langage de description d&#39;interface (IDL : interface description language).</p>
+
+
+
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<!--  <script src="lib/js/mermaid.min.js"></script> -->
+		<script src="js/reveal.js"></script>
+		
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+				
+				// The "normal" size of the presentation, aspect ratio will be preserved
+				// when the presentation is scaled to fit different resolutions. Can be
+				// specified using percentage units.
+				width: "100%",
+				height: "100%",
+
+				// Factor of the display size that should remain empty around the content
+				margin: 0.05,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.5,
+				
+				// Display the page number of the current slide
+				slideNumber: true,
+
+				// Push each slide change to the browser history
+				history: true,
+				
+			});
+		</script>
+	</body>
+</html>
+
+
