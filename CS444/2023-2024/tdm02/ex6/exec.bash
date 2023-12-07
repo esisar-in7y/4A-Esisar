@@ -1,9 +1,1 @@
-#!/bin/bash
-
-end=$1
-for number in $(seq 1 $end)
-do
-    exec java Client $number
-done
-exec java Client -1
-exit 0
+45[ 463]  853[ 245]  855[ 263 245 679]  859[ 245]  872[ 498 498]  876[ 362]  882[ 306]  890[ 498]  894[ 299 299]
