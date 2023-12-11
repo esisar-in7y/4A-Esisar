@@ -1,4 +1,5 @@
 **/eclipse/**/doc/
+**/htmlcov/
 .venv
 *.class
 
