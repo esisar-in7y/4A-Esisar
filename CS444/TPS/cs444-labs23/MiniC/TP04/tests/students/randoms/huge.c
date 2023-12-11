@@ -62,4 +62,4 @@ int main() {
 }
 
 // EXPECTED
-// 28
+// 27

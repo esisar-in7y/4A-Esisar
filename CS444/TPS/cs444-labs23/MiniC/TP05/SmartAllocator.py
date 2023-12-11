@@ -1,4 +1,4 @@
-from Lib.Operands import Temporary, Operand, S, Register, DataLocation, GP_REGS
+from Lib.Operands import Temporary, Operand, S, Register, DataLocation, GP_REGS, FP
 from Lib.Statement import Instruction
 from Lib.Allocator import Allocator
 from Lib import RiscV
@@ -26,6 +26,25 @@ class SmartAllocator(Allocator):
         # TODO (lab5): compute before,after,args. This is similar to what
         # TODO (lab5): replace_mem and replace_reg from TP04 do.
         # and now return the new list!
+        num_registre = 1
+        old_instrs = old_instr.args()
+        for arg in old_instrs:
+            old_arg=arg
+            if isinstance(arg, Temporary) :
+                loc = arg.get_alloced_loc()
+                if loc not in GP_REGS: 
+                    if not old_instr.is_read_only():
+                        if num_registre == 1:
+                            after.append(Instruction('sd', S[num_registre], loc))
+                        else:
+                            before.append(Instruction('ld', S[num_registre], loc))
+                    else:
+                        arg = S[num_registre]
+                        before.append(Instruction('ld', S[num_registre], loc))
+                else:
+                    arg = arg.get_alloced_loc()
+                subst[old_arg]=arg
+                num_registre += 1
         instr = old_instr.substitute(subst)
         return before + [instr] + after
 
@@ -44,8 +63,6 @@ class SmartAllocator(Allocator):
         """
         # TODO (lab5): Move the raise statement below down as you progress
         # TODO (lab5): in the lab. It must be removed from the final version.
-        raise NotImplementedError("run: stopping here for now")
-
         # liveness analysis
         self._liveness.run()
 
@@ -55,14 +72,18 @@ class SmartAllocator(Allocator):
         if self._debug_graphs:
             print("printing the conflict graph")
             self._igraph.print_dot(self._basename + "_conflicts.dot")
-
+        if self._debug:
+            self._liveness.print_gen_kill()
         # Smart Alloc via graph coloring
         self.smart_alloc(self._basename + "_colored.dot")
 
     def interfere(self, t1, t2):
         """Interfere function: True if t1 and t2 are in conflit anywhere in
         the function."""
-        raise NotImplementedError("interfere() function (lab5)") # TODO
+        for _, set in self._liveness._liveout.items() :
+            if t1 in set and t2 in set:
+                return True
+        return False
 
     def build_interference_graph(self):
         """Build the interference graph. Nodes of the graph are temporaries,
@@ -98,13 +119,20 @@ class SmartAllocator(Allocator):
         # Graph.color() in LibGraphes.py). Then, construct a dictionary Temporary ->
         # Register or Offset. Our version is less than 15 lines
         # including debug log. You can get all temporaries with
-        # self._function_code._pool.get_all_temps().
+        # self._fdata._pool.get_all_temps.
         coloringreg = self._igraph.color()
         if self._debug_graphs:
             print("coloring = " + str(coloringreg))
             self._igraph.print_dot(outputname, coloringreg)
-        alloc_dict = {}
-        raise NotImplementedError("Allocation based on graph colouring (lab5)")
+        
+        for reg in self._fdata._pool._all_temps:
+            if coloringreg[reg] >= len(GP_REGS):
+                alloc_dict[reg] = self._igraph.new_offset(FP)
+            else:
+                alloc_dict[reg] = GP_REGS[len(GP_REGS) - 1 - coloringreg[reg]]
+        print(alloc_dict)
+        self._fdata._pool.set_temp_allocation(alloc_dict)
+        self._igraph._stacksize = self._fdata.get_offset()
         if self._debug:
             print("Allocation:")
             print(alloc_dict)

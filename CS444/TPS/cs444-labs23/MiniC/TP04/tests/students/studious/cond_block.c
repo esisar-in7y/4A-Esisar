@@ -2,7 +2,8 @@
 
 int main()
 {
-    int x = 5;
+    int x;
+    x = 5;
     if (x > 5)
     {
         println_int(-x);

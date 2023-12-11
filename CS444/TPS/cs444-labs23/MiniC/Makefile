@@ -3,6 +3,7 @@ PACKAGE = MiniC
 # Example: stop at the first failed test:
 #   make PYTEST_OPTS=-x test
 PYTEST_OPTS = 
+PYTHON = python3.10
 # Run the whole test infrastructure for a subset of test files e.g.
 #   make TEST_FILES='TP03/**/bad*.c' test
 ifdef TEST_FILES
@@ -49,30 +50,30 @@ test-pyright: antlr
 	# pyright .
 
 test-interpret: test-pyright test_interpreter.py main-deps
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) test_interpreter.py
+	${PYTHON} -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) test_interpreter.py
 
 
 # Test for naive allocator (also runs test_expect to check // EXPECTED directives):
 test-naive: test-pyright antlr
 ifndef MODE
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'naive or expect'
+	export MINICC_OPTS="${MINICC_OPTS} --mode codegen-linear"
 endif
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'naive or expect'
+	${PYTHON} -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'naive or expect'
 
 # Test for all but the smart allocator, i.e. everything that lab4 should pass:
 test-lab4: test-pyright antlr
 ifndef MODE
 	export MINICC_OPTS="${MINICC_OPTS} --mode codegen-linear"
 endif
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'not smart'
+	${PYTHON} -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'not smart'
 
 # Test just the smart allocator (quicker than tests)
 test-smart: test-pyright antlr
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'smart'
+	${PYTHON} -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py -k 'smart'
 
 # Complete testsuite (should pass for lab5):
 test-codegen: test-pyright antlr
-	python3.10 -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py
+	${PYTHON} -m pytest $(PYTEST_BASE_OPTS) $(PYTEST_OPTS) ./test_codegen.py
 
 tar: clean
 	dir=$$(basename "$$PWD") && cd .. && \
@@ -99,5 +100,5 @@ clean-tests:
 	find . -iname "*.riscv" -print0 | xargs -0 rm -rf \;
 
 clean: clean-tests
-	find . \( -iname "*~" -or -iname ".cache*" -or -iname "*.diff" -or -iname "log*.txt" -or -iname "__pycache__" -or -iname "*.tokens" -or -iname "*.swp" -or -iname "*.interp" \) -print0 | xargs -0 rm -rf \;
+	find . \( -iname "*~" -or -iname ".cache*" -or -iname "*.diff" -or -iname "log*.txt" -or -iname "__pycache__" -or -iname "*.tokens" -or -iname "*.swp" -or -iname "*.interp" -or -iname "*.dot"  -or -iname "*.dot.pdf" \) -print0 | xargs -0 rm -rf \;
 	rm -rf *~ $(PACKAGE)Parser.py $(PACKAGE)Lexer.py $(PACKAGE)Visitor.py .coverage .benchmarks htmlcov

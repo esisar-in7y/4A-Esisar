@@ -12,15 +12,23 @@ from Lib.Statement import (
 from Lib.Terminator import jump2terminator
 from Lib.CFG import Block, BlockInstr, CFG
 
-
 def find_leaders(instructions: List[CodeStatement]) -> List[int]:
     """
     Find the leaders in the given list of instructions as linear code.
     Returns a list of indices in the instruction list whose first is 0 and
     last is len(instructions)
     """
+    # 1 The first instruction in the intermediate code is a leader.
     leaders: List[int] = [0]
-    # TODO fill leaders (Lab4b, Exercise 3)
+    for n, instr in enumerate(instructions):
+        # 2 Any instruction that is the target of a conditional or unconditional jump is a
+        # leader.
+        if isinstance(instr, AbsoluteJump | ConditionalJump):
+            leaders.append(n+1)
+        # 3 Any instruction that immediately follows a conditional or
+        # unconditional jump is a leader.
+        elif isinstance(instr, Label):  # we know that we have generated the code.
+            leaders.append(n)
     # The final "ret" is also a form of jump
     leaders.append(len(instructions))
     return leaders
@@ -64,19 +72,18 @@ def prepare_chunk(pre_chunk: List[CodeStatement], fdata: FunctionData) -> tuple[
     jump = None
     inner_statements: List[CodeStatement] = pre_chunk
     #Extract the first instruction from inner_statements if it is a label, or create a fresh one
-    raise NotImplementedError() # TODO (Lab4b, Exercise 3)
-    #Extract the last instruction from inner_statements if it is a jump, or do nothing
-    raise NotImplementedError() # TODO (Lab4b, Exercise 3)
-    #Check that there is no other label or jump left in inner_statements
-    # Extract the first instruction from inner_statements if it is a label, or create a fresh one
-    if isinstance(inner_statements[0], Label):
-        label = inner_statements.pop(0)
+    maybe_label = inner_statements[0]
+    if isinstance(maybe_label, Label):
+        inner_statements = inner_statements[1:]  # Remove the Label
+        label = maybe_label
     else:
         label = fdata.fresh_label(fdata._name)
-        #inner_statements.append(label)
-    # Extract the last instruction from inner_statements if it is a jump, or do nothing
-    if isinstance(inner_statements[-1], (ConditionalJump, AbsoluteJump)):
-        jump = inner_statements.pop(-1)
+    if len(inner_statements) != 0:  # pre_chunk has size 1 if there are two successive labels
+        maybe_jump = inner_statements[-1]
+        if isinstance(maybe_jump, AbsoluteJump | ConditionalJump):
+            inner_statements = inner_statements[:-1]  # Remove the Jump
+            jump = maybe_jump
+
     l: List[BlockInstr] = []
     for i in inner_statements:
         match i:

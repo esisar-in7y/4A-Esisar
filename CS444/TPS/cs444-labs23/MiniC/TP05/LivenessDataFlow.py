@@ -37,7 +37,11 @@ class LivenessDataFlow:
         kill = set()
         for i in block.get_all_statements():
             # Reminder: '|' is set union, '-' is subtraction.
-            raise NotImplementedError()
+            if isinstance(i,Instruction):
+                if self._debug:
+                    self.print_gen_kill()
+                kill = kill | {m for m in i.defined() if isinstance(m,Temporary)}
+                gen = (gen | {m for m in i.used() if isinstance(m,Temporary)}) - kill
         block._gen = gen
         block._kill = kill
 

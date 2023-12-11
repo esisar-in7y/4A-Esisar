@@ -2,7 +2,8 @@
 
 int main()
 {
-    int i = 0;
+    int i;
+    i = 0;
     while (i < 5)
     {
         println_int(i);
