@@ -7,7 +7,9 @@ MONCORGE - LEPRAT
 
 # Contents
 
-TODO for STUDENTS : Say a bit about the code infrastructure ...
+SmartAllocator.py implements a smart register allocator for MiniC. Unlike the naive allocator, it tries to minimize the number of register spills by using the Kempe algorithm as described in the course.
+
+LivenessDataflow.py is used by SmartAllocator.py to compute the liveness information for each basic block.
 
 # Howto
 python3.10 MiniCC.py --mode codegen-cfg --reg-alloc naive --graphs TP04/tests/provided/dataflow/df02.c
@@ -35,5 +37,5 @@ TODO: explain your choices
 
 # Known bugs
 
-TODO: Bugs and limitations.
+No known bugs.
 
