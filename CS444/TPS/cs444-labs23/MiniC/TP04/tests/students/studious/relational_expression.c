@@ -11,5 +11,6 @@ int main()
     println_bool(z);
     return 0;
 }
+
 // EXPECTED
 // 1
