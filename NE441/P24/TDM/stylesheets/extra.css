@@ -1,0 +1,14 @@
+.md-typeset h2
+{
+	font-weight: 400;
+	text-decoration: underline;
+}
+
+
+.md-typeset h3
+{
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+

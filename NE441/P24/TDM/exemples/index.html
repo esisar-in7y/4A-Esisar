@@ -1,0 +1,912 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Exemples du cours - ESISAR -  NE441</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exemples-du-cours" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="ESISAR -  NE441" class="md-header-nav__button md-logo" aria-label="ESISAR -  NE441">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ESISAR -  NE441
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Exemples du cours
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ESISAR -  NE441" class="md-nav__button md-logo" aria-label="ESISAR -  NE441">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ESISAR -  NE441
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../intro/index.html" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Exemples du cours
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./index.html" title="Exemples du cours" class="md-nav__link md-nav__link--active">
+      Exemples du cours
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lapi-des-sockets-en-java-udp" class="md-nav__link">
+    L'API des sockets en Java - UDP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lapi-des-sockets-en-java-tcp" class="md-nav__link">
+    L'API des sockets en Java - TCP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-threads-en-java" class="md-nav__link">
+    Les threads en Java
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#points-plus-complexes" class="md-nav__link">
+    Points plus complexes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../aidememoire/index.html" title="Aide mémoire Java" class="md-nav__link">
+      Aide mémoire Java
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../outils/index.html" title="Aide Eclipse" class="md-nav__link">
+      Aide Eclipse
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rappel_reseau/index.html" title="Rappels réseau" class="md-nav__link">
+      Rappels réseau
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm01/index.html" title="TDM01" class="md-nav__link">
+      TDM01
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm02/index.html" title="TDM02" class="md-nav__link">
+      TDM02
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm03/index.html" title="TDM03" class="md-nav__link">
+      TDM03
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm04/index.html" title="TDM04" class="md-nav__link">
+      TDM04
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm05/index.html" title="TDM05" class="md-nav__link">
+      TDM05
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm06/index.html" title="TDM06" class="md-nav__link">
+      TDM06
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm08/index.html" title="TDM08" class="md-nav__link">
+      TDM08
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm09/index.html" title="TDM09" class="md-nav__link">
+      TDM09
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tdm10/index.html" title="TDM10" class="md-nav__link">
+      TDM10
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lapi-des-sockets-en-java-udp" class="md-nav__link">
+    L'API des sockets en Java - UDP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lapi-des-sockets-en-java-tcp" class="md-nav__link">
+    L'API des sockets en Java - TCP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-threads-en-java" class="md-nav__link">
+    Les threads en Java
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#points-plus-complexes" class="md-nav__link">
+    Points plus complexes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="exemples-du-cours">Exemples du cours<a class="headerlink" href="#exemples-du-cours" title="Permanent link">&para;</a></h1>
+<p>Voici divers exemples de codes sur les notions vues durant ce cours</p>
+<h2 id="lapi-des-sockets-en-java-udp">L'API des sockets en Java - UDP<a class="headerlink" href="#lapi-des-sockets-en-java-udp" title="Permanent link">&para;</a></h2>
+<p>Réaliser un client UDP en Java </p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">udp</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.DatagramPacket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.DatagramSocket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.InetSocketAddress</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Client basique UDP</span>
+<span class="cm"> * </span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientUDP</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+    <span class="p">{</span>
+        <span class="n">ClientUDP</span> <span class="n">clientUDP</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClientUDP</span><span class="p">();</span>
+        <span class="n">clientUDP</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+    <span class="cm">/**</span>
+<span class="cm">     * Le client cree une socket, envoie un message au serveur</span>
+<span class="cm">     * et attend la reponse </span>
+<span class="cm">     * </span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Demarrage du client ...&quot;</span><span class="p">);</span>
+
+        <span class="c1">//Creation de la socket</span>
+        <span class="n">DatagramSocket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramSocket</span><span class="p">();</span>
+
+        <span class="c1">// Creation et envoi du message</span>
+        <span class="n">InetSocketAddress</span> <span class="n">adrDest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5099</span><span class="p">);</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;question du client&quot;</span><span class="p">).</span><span class="na">getBytes</span><span class="p">();</span>
+        <span class="n">DatagramPacket</span> <span class="n">dpE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramPacket</span><span class="p">(</span><span class="n">bufE</span><span class="p">,</span> <span class="n">bufE</span><span class="p">.</span><span class="na">length</span><span class="p">,</span> <span class="n">adrDest</span><span class="p">);</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">dpE</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message envoyé&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Attente de la reponse </span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufR</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">2048</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">DatagramPacket</span> <span class="n">dpR</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramPacket</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="n">bufR</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="n">dpR</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">reponse</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="n">dpR</span><span class="p">.</span><span class="na">getOffset</span><span class="p">(),</span> <span class="n">dpR</span><span class="p">.</span><span class="na">getLength</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Reponse recue = &quot;</span><span class="o">+</span><span class="n">reponse</span><span class="p">);</span>
+
+        <span class="c1">// Fermeture de la socket</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Arret du client .&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Réaliser un serveur UDP en Java </p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">udp</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.DatagramPacket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.DatagramSocket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.InetSocketAddress</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Serveur basique UDP</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServeurUDP</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+    <span class="p">{</span>
+        <span class="n">ServeurUDP</span> <span class="n">serveurUDP</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServeurUDP</span><span class="p">();</span>
+        <span class="n">serveurUDP</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Demarrage du serveur ...&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Le serveur se declare aupres de la couche transport</span>
+        <span class="c1">// sur le port 5099</span>
+        <span class="n">DatagramSocket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramSocket</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="mi">5099</span><span class="p">));</span>
+
+        <span class="c1">// Attente du premier message</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufR</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">2048</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">DatagramPacket</span> <span class="n">dpR</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramPacket</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="n">bufR</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="n">dpR</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="n">dpR</span><span class="p">.</span><span class="na">getOffset</span><span class="p">(),</span> <span class="n">dpR</span><span class="p">.</span><span class="na">getLength</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message recu = &quot;</span><span class="o">+</span><span class="n">message</span><span class="p">);</span>
+
+        <span class="c1">// Emission d&#39;un message en retour</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">).</span><span class="na">getBytes</span><span class="p">();</span>
+        <span class="n">DatagramPacket</span> <span class="n">dpE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DatagramPacket</span><span class="p">(</span><span class="n">bufE</span><span class="p">,</span> <span class="n">bufE</span><span class="p">.</span><span class="na">length</span><span class="p">,</span> 
+                <span class="n">dpR</span><span class="p">.</span><span class="na">getAddress</span><span class="p">(),</span><span class="n">dpR</span><span class="p">.</span><span class="na">getPort</span><span class="p">());</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">dpE</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message envoye = ok&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Fermeture de la socket</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Arret du serveur .&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="lapi-des-sockets-en-java-tcp">L'API des sockets en Java - TCP<a class="headerlink" href="#lapi-des-sockets-en-java-tcp" title="Permanent link">&para;</a></h2>
+<p>Réaliser un client TCP en Java </p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">tcp</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.OutputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.InetSocketAddress</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Client basique TCP</span>
+<span class="cm"> * </span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientTCP</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+    <span class="p">{</span>
+        <span class="n">ClientTCP</span> <span class="n">clientTCP</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClientTCP</span><span class="p">();</span>
+        <span class="n">clientTCP</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>                
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Le client cree une socket, envoie un message au serveur</span>
+<span class="cm">     * et attend la reponse </span>
+<span class="cm">     * </span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Demarrage du client ...&quot;</span><span class="p">);</span>
+
+        <span class="c1">//Creation de la socket</span>
+        <span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Socket</span><span class="p">();</span>
+
+        <span class="c1">// Connexion au serveur </span>
+        <span class="n">InetSocketAddress</span> <span class="n">adrDest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5099</span><span class="p">);</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">adrDest</span><span class="p">);</span>        
+
+        <span class="c1">// Envoi de la requete</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;question du client&quot;</span><span class="p">).</span><span class="na">getBytes</span><span class="p">();</span>
+        <span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span>
+        <span class="n">os</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">bufE</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message envoye&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Attente de la reponse </span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufR</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">2048</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="na">getInputStream</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">lenBufR</span> <span class="o">=</span> <span class="n">is</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">bufR</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">lenBufR</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">String</span> <span class="n">reponse</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">lenBufR</span> <span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Reponse recue = &quot;</span><span class="o">+</span><span class="n">reponse</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Fermeture de la socket</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Arret du client .&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Réaliser un serveur TCP en Java </p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">tcp</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.OutputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.InetSocketAddress</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.ServerSocket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Serveur basique TCP</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServeurTCP</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+    <span class="p">{</span>
+        <span class="n">ServeurTCP</span> <span class="n">serveurTCP</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServeurTCP</span><span class="p">();</span>
+        <span class="n">serveurTCP</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Demarrage du serveur ...&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Le serveur se declare aupres de la couche transport</span>
+        <span class="c1">// sur le port 5099</span>
+        <span class="n">ServerSocket</span> <span class="n">socketEcoute</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServerSocket</span><span class="p">();</span>
+        <span class="n">socketEcoute</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="mi">5099</span><span class="p">));</span>
+
+
+        <span class="c1">// Attente de la connexion d&#39;un client</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Attente de la connexion du client ...&quot;</span><span class="p">);</span>
+        <span class="n">Socket</span> <span class="n">socketConnexion</span> <span class="o">=</span> <span class="n">socketEcoute</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+
+        <span class="c1">// Affichage du port et de l&#39;ip du client </span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Un client est connecté&quot;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;IP:&quot;</span><span class="o">+</span><span class="n">socketConnexion</span><span class="p">.</span><span class="na">getInetAddress</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Port:&quot;</span><span class="o">+</span><span class="n">socketConnexion</span><span class="p">.</span><span class="na">getPort</span><span class="p">());</span>
+
+
+        <span class="c1">// Un client s&#39;est connecte, le serveur lit le message envoye par le client (sans garantie de lire tout le message)</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufR</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">2048</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">socketConnexion</span><span class="p">.</span><span class="na">getInputStream</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">lenBufR</span> <span class="o">=</span> <span class="n">is</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">bufR</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">lenBufR</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">bufR</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">lenBufR</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message recu = &quot;</span><span class="o">+</span><span class="n">message</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+        <span class="c1">// Emission d&#39;un message en retour</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bufE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">).</span><span class="na">getBytes</span><span class="p">();</span>
+        <span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">socketConnexion</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span>
+        <span class="n">os</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">bufE</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message envoye = ok&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Fermeture de la socket de connexion</span>
+        <span class="n">socketConnexion</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+
+
+        <span class="c1">// Arret du serveur </span>
+        <span class="n">socketEcoute</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Arret du serveur .&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="les-threads-en-java">Les threads en Java<a class="headerlink" href="#les-threads-en-java" title="Permanent link">&para;</a></h2>
+<p>L'exemple PingPong vu en cours</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">thread</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PingPong</span> <span class="kd">extends</span> <span class="n">Thread</span>
+<span class="p">{</span>
+    <span class="n">String</span> <span class="n">chaine</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">delai</span><span class="p">;</span>
+
+
+    <span class="kd">public</span> <span class="nf">PingPong</span><span class="p">(</span><span class="n">String</span> <span class="n">chaine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">delai</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">super</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">chaine</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">delai</span> <span class="o">=</span> <span class="n">delai</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">chaine</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="n">delai</span><span class="p">);</span>
+            <span class="p">}</span> 
+            <span class="k">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span>
+            <span class="p">{</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * @param args</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">PingPong</span> <span class="n">ping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PingPong</span><span class="p">(</span><span class="s">&quot;ping&quot;</span><span class="p">,</span> <span class="mi">330</span><span class="p">);</span>
+        <span class="n">PingPong</span> <span class="n">pong</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PingPong</span><span class="p">(</span><span class="s">&quot;pong&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+
+        <span class="n">ping</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">pong</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+<p>L'exemple "Calcul de la constante d'Euler"  vu en cours</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">thread</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Euler</span> <span class="kd">extends</span> <span class="n">Thread</span>
+<span class="p">{</span>
+    <span class="kt">long</span> <span class="n">start</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">end</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">res</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+
+    <span class="kd">public</span> <span class="nf">Euler</span><span class="p">(</span><span class="kt">long</span> <span class="n">start</span><span class="p">,</span><span class="kt">long</span> <span class="n">end</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>   
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * @param args</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span>
+    <span class="p">{</span>
+
+
+        <span class="n">Euler</span> <span class="n">e1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Euler</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5000000000l</span><span class="p">);</span>
+        <span class="n">Euler</span> <span class="n">e2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Euler</span><span class="p">(</span><span class="mi">5000000001l</span><span class="p">,</span> <span class="mi">10000000000l</span><span class="p">);</span>
+
+        <span class="n">e1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">e2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="n">e1</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+        <span class="n">e2</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+
+        <span class="kt">double</span> <span class="n">euler</span> <span class="o">=</span> <span class="n">e1</span><span class="p">.</span><span class="na">res</span><span class="o">+</span><span class="n">e2</span><span class="p">.</span><span class="na">res</span><span class="o">-</span><span class="n">Math</span><span class="p">.</span><span class="na">log</span><span class="p">(</span><span class="mi">10000000000l</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Euler=&quot;</span><span class="o">+</span><span class="n">euler</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="points-plus-complexes">Points plus complexes<a class="headerlink" href="#points-plus-complexes" title="Permanent link">&para;</a></h2>
+<p>Fermeture de la socket dans un seul sens </p>
+<p>Partie  client</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.OutputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.ServerSocket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.UnknownHostException</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShutDownClient</span> 
+<span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">InterruptedException</span> 
+    <span class="p">{</span>
+        <span class="n">ShutDownClient</span> <span class="n">shutDownClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ShutDownClient</span><span class="p">();</span>
+        <span class="n">shutDownClient</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">InterruptedException</span> 
+    <span class="p">{</span>
+        <span class="c1">// Connection au serveur : on peut voir 3 paquets IP (dialogue ternaire)</span>
+        <span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Socket</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">);</span>
+
+        <span class="c1">// Attente de 30 seconces</span>
+        <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">30_000</span><span class="p">);</span>
+
+
+        <span class="c1">// Envoi d&#39;un segment TCP toutes les 5 secondes</span>
+        <span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">os</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="s">&quot;xyz&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+            <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Partie serveur </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.ServerSocket</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShutDownServer</span> 
+<span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">InterruptedException</span> 
+    <span class="p">{</span>
+        <span class="n">ShutDownServer</span> <span class="n">shutDownServer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ShutDownServer</span><span class="p">();</span>
+        <span class="n">shutDownServer</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">InterruptedException</span> 
+    <span class="p">{</span>
+
+        <span class="n">ServerSocket</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServerSocket</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+
+        <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10_000</span><span class="p">);</span>
+
+        <span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+
+
+        <span class="c1">// Fermeture de la socket , uniquement dans le sens Serveur vers Client</span>
+        <span class="n">socket</span><span class="p">.</span><span class="na">shutdownOutput</span><span class="p">();</span>
+
+
+        <span class="c1">// Le serveur peut toujours recevoir des messages du client</span>
+
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="na">getInputStream</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">len</span><span class="o">=</span><span class="n">is</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+
+        <span class="k">while</span><span class="p">(</span><span class="n">len</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;m=&quot;</span><span class="o">+</span><span class="n">message</span><span class="p">);</span>
+            <span class="n">len</span><span class="o">=</span><span class="n">is</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ["instant"],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
