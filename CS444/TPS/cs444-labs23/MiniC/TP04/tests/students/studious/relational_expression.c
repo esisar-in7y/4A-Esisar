@@ -4,12 +4,13 @@ int main()
 {
     int x;
     int y;
-    int z;
+    bool z;
     x = 5;
     y = 3;
     z = (x > y);
-    println_int(z);
+    println_bool(z);
     return 0;
 }
+
 // EXPECTED
 // 1
