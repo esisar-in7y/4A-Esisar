@@ -1,0 +1,78 @@
+<project name="tp4" basedir="." default="run">
+
+	<property name="src.dir" value="src" />
+	<property name="test.dir" value="test" />
+	<property name="test.build" value="build/test" />
+	<property name="reportdir" value="report" />
+	<property name="src.build" value="build" />
+	<property name="classesdir" value="${src.build}/classes" />
+	<property name="jardir" value="${src.build}/jar" />
+	<property name="docdir" value="doc" />
+	<property name="lib" value="lib" />
+
+	<property name="MainClass" value="fr.esisar.tp4.EntrepriseTestDrive" />
+	<path id="classpath.test">
+		<fileset dir="${lib}" includes="*.jar" />
+		<pathelement location="${classesdir}" />
+	</path>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${classesdir}" />
+		<javac srcdir="${src.dir}" destdir="${classesdir}" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib}" includes="*.jar" />
+			</classpath>
+		</javac>
+		<copy file="log4j2.xml" todir="${classesdir}" />
+	</target>
+
+	<target name="compile-test" depends="compile">
+		<mkdir dir="${test.build}" />
+		<javac srcdir="${test.dir}" destdir="${test.build}" includeantruntime="false">
+			<classpath refid="classpath.test" />
+		</javac>
+		<copy file="log4j2.xml" todir="${classesdir}" />
+	</target>
+
+	<target name="package" depends="compile">
+		<mkdir dir="${jardir}" />
+		<jar destfile="${jardir}/${ant.project.name}.jar" basedir="${classesdir}">
+			<manifest>
+				<attribute name="Main-Class" value="${MainClass}" />
+			</manifest>
+			<zipgroupfileset dir="${lib}">
+				<include name="**/log4j*.jar" />
+			</zipgroupfileset>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${src.build}" />
+	</target>
+
+	<target name="run" depends="package">
+		<java jar="${jardir}/${ant.project.name}.jar" fork="true">
+			<arg value="-Dlog4j.configurationFile=log4j2.xml" />
+		</java>
+	</target>
+
+
+	<target name="doc" description="generate documentation">
+		<javadoc sourcepath="${src.dir}" destdir="${docdir}">
+			<classpath refid="classpath.test" />
+		</javadoc>
+	</target>
+
+	<target name="junit" depends="compile-test">
+		<junit printsummary="on" haltonfailure="yes" fork="false">
+			<classpath>
+				<path refid="classpath.test" />
+				<pathelement location="${test.build}" />
+			</classpath>
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${test.dir}" includes="**/*.java" />
+			</batchtest>
+		</junit>
+	</target>
+</project>
