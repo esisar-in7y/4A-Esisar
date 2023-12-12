@@ -182,7 +182,7 @@ def print_ssa_graph(basename, fname, comment, graph):  # pragma: no cover
 def enter_ssa(function: CFG, basename="prog", debug=False, debug_graphs=False):
     # TODO (lab5): Move the raise statement below down as you progress
     # TODO (lab5): in the lab. It must be removed from the final version.
-    raise NotImplementedError("run enter SSA: stopping here for now")
+#    raise NotImplementedError("run enter SSA: stopping here for now")
 
     # Compute the dominators
     dominators = computeDom(function)
