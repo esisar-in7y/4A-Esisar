@@ -7,115 +7,122 @@ import matplotlib.pyplot as plt
 from random import *
 import time
 from pyomo.contrib.community_detection.community_graph import generate_model_graph
-class bcolors:
+
+class TerminalColors:
     HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
+    INFO = '\033[94m'
+    EMPHASIS = '\033[96m'
+    SUCCESS = '\033[92m'
+    NOTICE = '\033[93m'
+    ERROR = '\033[91m'
+    RESET = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def printer(instance):
-    print(f'boites:')
-    A=[]
+def display_instance(instance):
+    print(f'Boxes:')
+    formatted_boxes = []
     for i in instance.I:
-        A.append([
-            f'{bcolors.OKGREEN}{i}_{j}' if pyo.value(instance.x[i,j]) == 1 else f'{bcolors.FAIL}{i}_{j}' for j in instance.I
+        formatted_boxes.append([
+            f'{TerminalColors.SUCCESS}{i}_{j}' if pyo.value(instance.x[i,j]) == 1 else f'{TerminalColors.ERROR}{i}_{j}' for j in instance.I
         ])
-    largests = [max([len(c) for c in b]) for b in A]
-    for b in A:
-        print(f'{bcolors.ENDC}|'.join([c.ljust(largests[i]) for i,c in enumerate(b)]))
-    print(bcolors.ENDC)
+    max_lengths = [max([len(c) for c in b]) for b in formatted_boxes]
+    for b in formatted_boxes:
+        print(f'{TerminalColors.RESET}|'.join([c.ljust(max_lengths[i]) for i,c in enumerate(b)]))
+    print(TerminalColors.RESET)
 
-def generate_bp_instance(n,s):
+def generate_bin_packing_subset(n, s):
     seed(s)
-    l = [0]*n
+    subset_sizes = [0]*n
     for i in range(0, n):
-        l[i]=randint(n, 2*n)
-    size = 3*n
-    return (l, size)
+        subset_sizes[i] = randint(n, 2*n)
+    total_size = 3*n
+    return (subset_sizes, total_size)
 
-def gen_abstract_model():
+def create_abstract_bin_packing_model():
     model = pyo.AbstractModel(name='bin-packing')
 
-    model.nb_obj = pyo.Param(within=pyo.NonNegativeIntegers) # Nombre d'objets
+    model.number_of_objects = pyo.Param(within=pyo.NonNegativeIntegers) # Number of objects
 
-    model.I = pyo.RangeSet(1, model.nb_obj) # Paramètres parcourant les objets
+    model.I = pyo.RangeSet(1, model.number_of_objects) # Parameters traversing the objects
     model.box_size = pyo.Param(initialize=60)
 
-    model.object_size = pyo.Param(model.I, initialize=0) # Coefficients de taille d'objets.
-    
-    model.x = pyo.Var(model.I, model.I, domain=pyo.Binary)
-    model.y = pyo.Var(model.I, domain=pyo.Binary) # used boxes
+    model.object_size = pyo.Param(model.I, initialize=0) # Size coefficients of objects.
 
-    def contrainte_taille_boites(m, j):
+    model.x = pyo.Var(model.I, model.I, domain=pyo.Binary) # Binary placement of objects in boxes
+    model.y = pyo.Var(model.I, domain=pyo.Binary) # Binary indicator of used boxes
+
+    def ensure_box_size(m, j):
         return sum(m.object_size[i] * m.x[i,j] for i in m.I) <= m.box_size*m.y[j]
-    model.constraint1 = pyo.Constraint(model.I, rule=contrainte_taille_boites)
+    model.constraint1 = pyo.Constraint(model.I, rule=ensure_box_size)
 
-    def contrainte_objet_boite_unique(m, i):
+    def ensure_unique_box_for_object(m, i):
         return sum(m.x[i,j] for j in m.I) == 1
-    model.constraint2 = pyo.Constraint(model.I, rule=contrainte_objet_boite_unique)
+    model.constraint2 = pyo.Constraint(model.I, rule=ensure_unique_box_for_object)
 
-    def contrainte_all_objects_used(m):
-        return sum(m.x[i,j] for i in m.I for j in m.I) == m.nb_obj
-    model.constraint3 = pyo.Constraint(rule=contrainte_all_objects_used)
+    def ensure_all_objects_are_used(m):
+        return sum(m.x[i,j] for i in m.I for j in m.I) == m.number_of_objects
+    model.constraint3 = pyo.Constraint(rule=ensure_all_objects_are_used)
 
-    def contrainte_boites_contigue(m, j):
+    def enforce_adjacent_boxes_rule(m, j):
         if j > 1:
             return m.y[j-1] >= m.y[j]
         else:
             return pyo.Constraint.Skip
-    #model.constraint4 = pyo.Constraint(model.I, rule=contrainte_boites_contigue)
+    #model.constraint4 = pyo.Constraint(model.I, rule=enforce_adjacent_boxes_rule)
 
-    def contrainte_charge_total(m, j):
+    def ensure_total_weight_distribution(m, j):
         if j > 1:
             return sum(m.object_size[i] * m.x[i,j] for i in m.I) >= sum(m.object_size[i] * m.x[i,j-1] for i in m.I)
         else:
             return pyo.Constraint.Skip
-    #model.constraint5 = pyo.Constraint(model.I, rule=contrainte_charge_total)
+    model.constraint5 = pyo.Constraint(model.I, rule=ensure_total_weight_distribution)
 
-    def contrainte_rangement(m, i, j):
+    def ensure_proper_arrangement(m, i, j):
         if i > 1 and j > 1:
             return m.x[i,j] <= sum(m.x[k,l] for k in range(1, i) for l in range(1, j))
         else:
             return pyo.Constraint.Skip
-    model.constraint6 = pyo.Constraint(model.I, model.I, rule=contrainte_rangement)
+    model.constraint6 = pyo.Constraint(model.I, model.I, rule=ensure_proper_arrangement)
 
 
-    def objective(m):
+    def minimize_box_usage(m):
         return pyo.summation(m.y)
-    model.objective = pyo.Objective(rule=objective, sense=pyo.minimize)
+    model.objective = pyo.Objective(rule=minimize_box_usage, sense=pyo.minimize)
 
     return model
 
-def calculate_bin_packing_solve_time(model:pyo.AbstractModel,SIZE: int, SEED: int) -> (float, int):
-    a_values, box_size = generate_bp_instance(SIZE, SEED)
+def calculate_execution_time(model:pyo.AbstractModel,problem_size: int, SEED: int) -> (float, int):
+    # Generating subset for bin packing
+    subset_values, total_size = generate_bin_packing_subset(problem_size, SEED)
     input_data = {
         None:{
-            'nb_obj' : {None: SIZE},
-            'object_size' : {i: a_values[i-1] for i in range(1, SIZE+1)},
-            'box_size' : {None: box_size}
+            'number_of_objects' : {None: problem_size},
+            'object_size' : {i: subset_values[i-1] for i in range(1, problem_size+1)},
+            'box_size' : {None: total_size}
         }
     }
-
+    # Creating model instance
     instance = model.create_instance(input_data)
-    # instance.pprint()
+
     solver=pyo.SolverFactory('glpk')
     model_graph, number_component_map, constraint_variable_map = generate_model_graph(instance,'bipartite')
+
+    # Counting number of nodes in the model graph
     num_nodes = model_graph.number_of_nodes()
     print(f'Number of nodes in the model graph: {num_nodes}')
 
+    # Measuring solve time
     beginning = time.time()
     results = solver.solve(instance)
     total_time = time.time()-beginning
+
+    # Checking for optimality of the solution
     if results.solver.termination_condition == pyo.TerminationCondition.optimal:
         print(f'The solution is optimal. Execution time : {round(total_time,2)} seconds')
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print(f'Objective value: {pyo.value(instance.objective)}')
-        printer(instance)
+        display_instance(instance)
         return total_time,num_nodes
     else:
         instance.pprint()
@@ -123,85 +130,86 @@ def calculate_bin_packing_solve_time(model:pyo.AbstractModel,SIZE: int, SEED: in
         raise Exception('Solution is not optimal')
 
 
-def get_average_solve_time(model:pyo.AbstractModel,problem_size: int, amount_of_rounds: int, SEED:int) -> (float,int):
-    time_list = list()
-    nb_nodes = 0
-    for i in range (amount_of_rounds):
-        print("Round "+str(i+1)+" / "+str(amount_of_rounds),end='\r')
+def calculate_average_solve_time(model:pyo.AbstractModel,problem_size: int, number_of_rounds: int) -> (float,int):
+    solve_time_list = list()
+    num_nodes = 0
+    for i in range (number_of_rounds):
+        print("Round "+str(i+1)+" / "+str(number_of_rounds),end='\r')
         try:
-            time_exec,nb_nodes = calculate_bin_packing_solve_time(model,problem_size, SEED)
+            solve_time,num_nodes = calculate_execution_time(model,problem_size, i)
         except Exception as e:
             print(e)
             exit(1)
-        time_list.append(time_exec)
-        
-    output = sum(time_list)/len(time_list)
-    print(f"Average time for problem of size {problem_size} : {output}")
-    return (output,nb_nodes)
+        solve_time_list.append(solve_time)
+
+    average_solve_time = sum(solve_time_list)/len(solve_time_list)
+    print(f"Average time for problem of size {problem_size} : {average_solve_time}")
+    return (average_solve_time,num_nodes)
 
 
-def print_average_solve_time_curb(model:pyo.AbstractModel,min_problem_size:int, max_problem_size: int, SEED:int, amount_of_rounds :int):
-    time_list=list()
+def plot_average_solve_time_curve(model:pyo.AbstractModel,min_problem_size:int, max_problem_size: int, number_of_rounds :int):
+    solve_time_list=list()
     problem_size_list=list()
-    nb_nodes_list=list()
+    num_nodes_list=list()
+
     for i in range (min_problem_size, max_problem_size):
         print("Problem size : "+str(i)+" / "+str(max_problem_size))
         problem_size_list.append(i)
-        time_exec,nb_nodes = get_average_solve_time(model,i, amount_of_rounds, SEED)
-        time_list.append(time_exec)
-        nb_nodes_list.append(nb_nodes)
-    
-    print(f"Problem size list : {nb_nodes_list}")
-    #Extrapolating part
-    #We extrapolate only up to the 3rd degree, and with problem size up to twice the maximum size
-    def complexity(x, a, b, c):
-        return x ** a + b*x+ c
-    popt, pcov = curve_fit(complexity, problem_size_list, time_list)
-    x_out = np.linspace(2, max_problem_size*2, max_problem_size*2)
-    y_pred = complexity(x_out, *popt)
-    
-    #Extrapolating number of nodes
-    popt, pcov = curve_fit(complexity, problem_size_list, nb_nodes_list)
-    x_nodes_out = np.linspace(2, max_problem_size*2, max_problem_size*2)
-    y_nodes_pred = complexity(x_nodes_out, *popt)
-    #Plotting figure
+        solve_time,num_nodes = calculate_average_solve_time(model,i, number_of_rounds)
+        solve_time_list.append(solve_time)
+        num_nodes_list.append(num_nodes)
+
+    print(f"Problem size list : {num_nodes_list}")
+
+    # Extrapolating runtime and nodes up to twice the maximum problem size
+    extrapolation_function = lambda x, a, b, c : x ** a + b*x+ c
+    x_out_range = np.linspace(2, max_problem_size*2, max_problem_size*2)
+
+    # Extrapolating solving time
+    popt, pcov = curve_fit(extrapolation_function, problem_size_list, solve_time_list)
+    time_pred = extrapolation_function(x_out_range, *popt)
+
+    # Extrapolating number of nodes
+    popt, pcov = curve_fit(extrapolation_function, problem_size_list, num_nodes_list)
+    nodes_pred = extrapolation_function(x_out_range, *popt)
+
+    # Plotting results
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
-    ax1.plot(problem_size_list, time_list, "bx", x_out, y_pred, "b-")
-    # plot also nodes on x axis, but scale on right
+    ax1.plot(problem_size_list, solve_time_list, "bx", x_out_range, time_pred, "b-")
     ax2 = ax1.twinx()
-    ax2.plot(problem_size_list, nb_nodes_list, "rx", x_nodes_out, y_nodes_pred, "r-")
+    ax2.plot(problem_size_list, num_nodes_list, "rx", x_out_range, nodes_pred, "r-")
     ax1.set_xlabel("Problem size (no unit)", color="b")
     ax1.set_ylabel("Solving time (seconds)", color="b")
     ax2.set_ylabel("Number of nodes in the model graph", color="r")
     plt.title("Solving time as a function of problem size")
     plt.show()
 
-
-def test(model):
-    instance = model.create_instance({
+# Rename variables and functions, and adding useful comments
+def validate_model(input_model):
+    instance = input_model.create_instance({
         None:{
-            'nb_obj' : {None: 9},
-            'object_size' : {i: i for i in range(1, 10)},
-            'box_size' : {None: 10}
+            'item_count' : {None: 9},
+            'item_size' : {i: i for i in range(1, 10)},
+            'box_capacity' : {None: 10}
         }
     })
-    solver=pyo.SolverFactory('glpk')
-    start=time.time()
-    results = solver.solve(instance)
-    end=time.time()
-    print(results)
-    print(f'Time to solve: {end-start}')
+    solver = pyo.SolverFactory('glpk')
+    start_time = time.time()
+    solver_output = solver.solve(instance)
+    end_time = time.time()
+    print(solver_output)
+    print(f'Time to solve: {end_time - start_time}')
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(f'Objective value: {pyo.value(instance.objective)}')
-    model_graph, number_component_map, constraint_variable_map = generate_model_graph(instance,'bipartite')
-    num_nodes = model_graph.number_of_nodes()
-    print(f'Number of nodes in the model graph: {num_nodes}')
-    printer(instance)
+    graph_model, component_num_mapper, constraint_var_mapper = generate_model_graph(instance, 'bipartite')
+    node_count = graph_model.number_of_nodes()
+    print(f'Number of nodes in the model graph: {node_count}')
+    display_instance(instance)
 
 
-model = gen_abstract_model()
-print_average_solve_time_curb(model,1, 13, 12385172391, 3)
-#test(model)
-# calculate_bin_packing_solve_time(model,20, 0)
-# calculate_bin_packing_solve_time(model,2, 1)
+model_to_test = create_abstract_bin_packing_model()
+# plot_average_solve_time_curve(model_to_test, 1, 13, 3)
+#test(model_to_test)
+# calculate_bin_packing_solve_time(model_to_test, 20, 0)
+calculate_execution_time(model_to_test, 5, 1)
