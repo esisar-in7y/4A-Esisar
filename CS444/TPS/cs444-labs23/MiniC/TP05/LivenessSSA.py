@@ -30,8 +30,7 @@ class LivenessSSA:
         if self._debug:
             self.print_map_in_out()
 
-    def live_start(self, block: Block, pos: int | None,
-                   s: Statement, op: Operand) -> None:
+    def live_start(self, block: Block, pos: int | None, s: Statement, op: Operand) -> None:
         """Start backward propagation of liveness information"""
         if isinstance(s, PhiNode):
             for label, var in s.used().items():

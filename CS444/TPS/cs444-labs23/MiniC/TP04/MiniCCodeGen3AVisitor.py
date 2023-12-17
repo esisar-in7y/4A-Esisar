@@ -145,11 +145,11 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         dest = self._current_function.fdata.fresh_tmp()
         tmp1 = self.visit(ctx.expr(0))
         tmp2 = self.visit(ctx.expr(1))
-        endrel = self._current_function.fdata.fresh_label("end_if")
+        end_if_label = self._current_function.fdata.fresh_label("end_if")
         self._current_function.add_instruction(RiscV.li(dest, 0))
-        self._current_function.add_instruction(RiscV.conditional_jump(endrel, tmp1, c.negate(), tmp2))
+        self._current_function.add_instruction(RiscV.conditional_jump(end_if_label, tmp1, c.negate(), tmp2))
         self._current_function.add_instruction(RiscV.li(dest, 1))
-        self._current_function.add_label(endrel)
+        self._current_function.add_label(end_if_label)
         return dest
 
     def visitMultiplicativeExpr(self, ctx) -> Operands.Temporary:
@@ -200,8 +200,7 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         # This skeleton doesn't deal properly with functions, and
         # hardcodes a "return 0;" at the end of function. Generate
         # code for this "return 0;".
-        self._current_function.add_instruction(
-        	RiscV.li(Operands.A0, Operands.Immediate(0)))
+        self._current_function.add_instruction(RiscV.li(Operands.A0, Operands.Immediate(0)))
         self._functions.append(self._current_function)
         del self._current_function
 

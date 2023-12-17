@@ -1,4 +1,4 @@
-from Lib.Operands import Temporary, Operand, S, Register, DataLocation, GP_REGS, FP
+from Lib.Operands import Temporary, Operand, S, Register, DataLocation, GP_REGS
 from Lib.Statement import Instruction
 from Lib.Allocator import Allocator
 from Lib import RiscV
@@ -23,28 +23,24 @@ class SmartAllocator(Allocator):
         before: List[Instruction] = []
         after: List[Instruction] = []
         subst: Dict[Operand, Operand] = {}
-        # TODO (lab5): compute before,after,args. This is similar to what
-        # TODO (lab5): replace_mem and replace_reg from TP04 do.
+        # TODOx (lab5): compute before,after,args. This is similar to what
+        # TODOx (lab5): replace_mem and replace_reg from TP04 do.
         # and now return the new list!
-        num_registre = 1
-        old_instrs = old_instr.args()
-        for arg in old_instrs:
-            old_arg=arg
+        numero_registre = 1
+        for arg in old_instr.args():
+            prev_arg=arg
             if isinstance(arg, Temporary) :
                 loc = arg.get_alloced_loc()
-                if loc not in GP_REGS: 
-                    if not old_instr.is_read_only():
-                        if num_registre == 1:
-                            after.append(Instruction('sd', S[num_registre], loc))
-                        else:
-                            before.append(Instruction('ld', S[num_registre], loc))
-                    else:
-                        arg = S[num_registre]
-                        before.append(Instruction('ld', S[num_registre], loc))
-                else:
+                if loc in GP_REGS:
                     arg = arg.get_alloced_loc()
-                subst[old_arg]=arg
-                num_registre += 1
+                else:
+                    Sregistre = S[numero_registre]
+                    if old_instr.is_read_only() or numero_registre != 1:
+                        before.append(Instruction('ld', Sregistre, loc))
+                    else:
+                        after.append(Instruction('sd', Sregistre, loc))
+                subst[prev_arg]=arg
+                numero_registre += 1
         instr = old_instr.substitute(subst)
         return before + [instr] + after
 
@@ -61,7 +57,7 @@ class SmartAllocator(Allocator):
         - Substitution of temporaries by actual locations in the
           3-address code.
         """
-        # TODO (lab5): Move the raise statement below down as you progress
+        # TODOx (lab5): Move the raise statement below down as you progress
         # TODO (lab5): in the lab. It must be removed from the final version.
         # liveness analysis
         self._liveness.run()
@@ -80,8 +76,11 @@ class SmartAllocator(Allocator):
     def interfere(self, t1, t2):
         """Interfere function: True if t1 and t2 are in conflit anywhere in
         the function."""
-        for _, set in self._liveness._liveout.items() :
-            if t1 in set and t2 in set:
+        for _liveout in self._liveness._liveout.values():
+            if (
+                t1 in _liveout and 
+                t2 in _liveout
+            ):
                 return True
         return False
 
@@ -115,24 +114,26 @@ class SmartAllocator(Allocator):
         # Temporary -> Operand (register or offset) dictionary,
         # specifying where a given Temporary should be allocated:
         alloc_dict = {}
-        # TODO (lab5): color the graph and get back the coloring (see
+        # TODOx (lab5): color the graph and get back the coloring (see
         # Graph.color() in LibGraphes.py). Then, construct a dictionary Temporary ->
         # Register or Offset. Our version is less than 15 lines
         # including debug log. You can get all temporaries with
-        # self._fdata._pool.get_all_temps.
+        # self._function_code._pool.get_all_temps(). => self._fdata._pool.get_all_temps() (line 92)
         coloringreg = self._igraph.color()
         if self._debug_graphs:
             print("coloring = " + str(coloringreg))
             self._igraph.print_dot(outputname, coloringreg)
+        alloc_dict = {}
         
         for reg in self._fdata._pool._all_temps:
-            if coloringreg[reg] >= len(GP_REGS):
-                alloc_dict[reg] = self._igraph.new_offset(FP)
-            else:
+            if coloringreg[reg] >= len(GP_REGS): #si y'en a trop on les met dans la pile
+                alloc_dict[reg] = self._igraph.new_offset(S[0])
+            else: #sinon on les met dans les registres
                 alloc_dict[reg] = GP_REGS[len(GP_REGS) - 1 - coloringreg[reg]]
-        print(alloc_dict)
-        self._fdata._pool.set_temp_allocation(alloc_dict)
+        # on met a jour la stacksize et l'allocation
         self._igraph._stacksize = self._fdata.get_offset()
+        self._fdata._pool.set_temp_allocation(alloc_dict)
+        
         if self._debug:
             print("Allocation:")
             print(alloc_dict)
