@@ -7,7 +7,7 @@ MONCORGE - LEPRAT
 
 # Contents
 
-SmartAllocator.py implements a smart register allocator for MiniC. Unlike the naive allocator, it tries to minimize the number of register spills by using the Kempe algorithm as described in the course.
+SmartAllocator.py implements a smart register allocator for MiniC. Unlike the naive allocator, it tries to minimize the number of register spills by using the Sethi-Ullman algorithm as described in the course. We also have a CFG.py file that is used to compute the control flow graph of a function, using the Kempe algorithm in order to color the graph.
 
 LivenessDataflow.py is used by SmartAllocator.py to compute the liveness information for each basic block.
 
@@ -33,7 +33,7 @@ We designed tests in order to have a good cover, we have tests for the allocatio
 
 # Design choices
 
-We followed the current design.
+We followed the current design and implemented everything needed to be implemented.
 
 # Known bugs
 
