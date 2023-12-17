@@ -29,11 +29,11 @@ make test-smart
 
 # Test design
 
-TODO: explain your tests
+We designed tests in order to have a good cover, we have tests for the allocation of multiple variables, reallocation of variables, and the allocation of variables in different blocks.
 
 # Design choices
 
-TODO: explain your choices
+We followed the current design.
 
 # Known bugs
 
