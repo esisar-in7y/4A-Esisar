@@ -1,0 +1,95 @@
+    1   0.000000 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Configuration Request
+    2   0.000333 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 40 Configuration Request
+    3   0.000340 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 36 Configuration Reject
+    4   0.001077 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Configuration Nak
+    5   0.001085 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Configuration Request
+    6   0.001280 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 41 Configuration Request
+    7   0.001287 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 32 Configuration Ack
+    8   0.002110 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Configuration Ack
+    9   0.002117 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Echo Request
+   10   0.002378 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 30 Echo Request
+   11   0.002384 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP CHAP 55 Challenge (NAME='strech', VALUE=0xedd51cc31f281790d935abd84ea2f09fba7871f98b6f)
+   12   0.002387 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 30 Echo Reply
+   13   0.003214 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Echo Reply
+   14   0.003221 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP CHAP 60 Response (NAME='lepratf', VALUE=0x5d791fc1870b79aa151e849ab2581474)
+   15   0.004265 192.168.130.25 → 192.168.130.206 RADIUS 138 Access-Request id=132
+   16   0.004740 192.168.130.206 → 192.168.130.25 RADIUS 74 Access-Accept id=132
+   17   0.004877 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP CHAP 26 Success (MESSAGE='')
+   18   0.004962 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP CCP 37 Configuration Request
+   19   0.004966 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP IPCP 38 Configuration Request
+   20   0.005923 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP CCP 60 Configuration Request
+   21   0.005932 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP IPCP 60 Configuration Request
+   22   0.005935 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP IPV6CP 60 Configuration Request
+   23   0.006148 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP CCP 37 Configuration Ack
+   24   0.006154 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP IPCP 32 Configuration Nak
+   25   0.006156 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 42 Protocol Reject
+   26   0.006489 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP CCP 60 Configuration Ack
+   27   0.006520 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP IPCP 60 Configuration Ack
+   28   0.006972 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP IPCP 60 Configuration Request
+   29   0.007139 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP IPCP 38 Configuration Ack
+   30   1.014109 a2:aa:1b:7a:67:c3 → Tp-LinkT_00:b2:98 PPP LCP 60 Termination Request
+   31   1.014985 Tp-LinkT_00:b2:98 → a2:aa:1b:7a:67:c3 PPP LCP 26 Termination Ack
+|Time     | a2:aa:1b:7a:67:c3                     | 192.168.130.25                        |
+|         |                   | Tp-LinkT_00:b2:98 |                   | 192.168.130.206   |                   
+|0.000000 |         Configuration Reques          |                   |                   |PPP LCP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.000333 |         Configuration Reques          |                   |                   |PPP LCP: Configuration Request
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.000340 |         Configuration Reject          |                   |                   |PPP LCP: Configuration Reject
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.001077 |         Configuration Nak             |                   |                   |PPP LCP: Configuration Nak
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.001085 |         Configuration Reques          |                   |                   |PPP LCP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.001280 |         Configuration Reques          |                   |                   |PPP LCP: Configuration Request
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.001287 |         Configuration Ack             |                   |                   |PPP LCP: Configuration Ack
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.002110 |         Configuration Ack             |                   |                   |PPP LCP: Configuration Ack
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.002117 |         Echo Request                  |                   |                   |PPP LCP: Echo Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.002378 |         Echo Request                  |                   |                   |PPP LCP: Echo Request
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.002384 |         Challenge (NAME='str          |                   |                   |PPP CHAP: Challenge (NAME='strech', VALUE=0xedd51cc31f281790d935abd84ea2f09fba7871f98b6f)
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.002387 |         Echo Reply|                   |                   |                   |PPP LCP: Echo Reply
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.003214 |         Echo Reply|                   |                   |                   |PPP LCP: Echo Reply
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.003221 |         Response (NAME='lepr          |                   |                   |PPP CHAP: Response (NAME='lepratf', VALUE=0x5d791fc1870b79aa151e849ab2581474)
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.004265 |                   |                   |         Access-Request id=13          |RADIUS: Access-Request id=132
+|         |                   |                   |(45267)  ------------------>  (1812)   |
+|0.004740 |                   |                   |         Access-Accept id=132          |RADIUS: Access-Accept id=132
+|         |                   |                   |(45267)  <------------------  (1812)   |
+|0.004877 |         Success (MESSAGE='')          |                   |                   |PPP CHAP: Success (MESSAGE='')
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.004962 |         Configuration Reques          |                   |                   |PPP CCP: Configuration Request
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.004966 |         Configuration Reques          |                   |                   |PPP IPCP: Configuration Request
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.005923 |         Configuration Reques          |                   |                   |PPP CCP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.005932 |         Configuration Reques          |                   |                   |PPP IPCP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.005935 |         Configuration Reques          |                   |                   |PPP IPV6CP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.006148 |         Configuration Ack             |                   |                   |PPP CCP: Configuration Ack
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.006154 |         Configuration Nak             |                   |                   |PPP IPCP: Configuration Nak
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.006156 |         Protocol Reject               |                   |                   |PPP LCP: Protocol Reject
+|         |(0)      <------------------  (0)      |                   |                   |
+|0.006489 |         Configuration Ack             |                   |                   |PPP CCP: Configuration Ack
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.006520 |         Configuration Ack             |                   |                   |PPP IPCP: Configuration Ack
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.006972 |         Configuration Reques          |                   |                   |PPP IPCP: Configuration Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|0.007139 |         Configuration Ack             |                   |                   |PPP IPCP: Configuration Ack
+|         |(0)      <------------------  (0)      |                   |                   |
+|1.014109 |         Termination Request           |                   |                   |PPP LCP: Termination Request
+|         |(0)      ------------------>  (0)      |                   |                   |
+|1.014985 |         Termination Ack               |                   |                   |PPP LCP: Termination Ack
+|         |(0)      <------------------  (0)      |                   |                   |

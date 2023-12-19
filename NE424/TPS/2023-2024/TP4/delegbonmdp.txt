@@ -1,0 +1,55 @@
+    1   0.000000 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Request
+    2   0.000324 Tp-LinkT_00:b2:98 →              PPP LCP 42 Configuration Request
+    3   0.000332 Tp-LinkT_00:b2:98 →              PPP LCP 38 Configuration Reject
+    4   0.001042 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Nak
+    5   0.001050 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Request
+    6   0.001240 Tp-LinkT_00:b2:98 →              PPP LCP 43 Configuration Request
+    7   0.001247 Tp-LinkT_00:b2:98 →              PPP LCP 34 Configuration Ack
+    8   0.001669 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Ack
+    9   0.001889 Tp-LinkT_00:b2:98 →              PPP LCP 32 Echo Request
+   10   0.001896 Tp-LinkT_00:b2:98 →              PPP CHAP 52 Challenge (NAME='strech', VALUE=0x91d09c6cae3254b9d28aa840b2c6ba37c3)
+   11   0.002076 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Echo Request
+   12   0.002238 Tp-LinkT_00:b2:98 →              PPP LCP 32 Echo Reply
+   13   0.002328 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Echo Reply
+   14   0.002573 a2:aa:1b:7a:67:c3 →              PPP CHAP 62 Response (NAME='lepratf@prof.com', VALUE=0x66136513e6752de07ccca151b964c9a4)
+   15   0.003525    127.0.0.1 → 127.0.0.1    RADIUS 144 Access-Request id=152
+   16   0.004174 192.168.130.25 → 192.168.130.206 RADIUS 164 Access-Request id=76
+   17   0.004551 192.168.130.206 → 192.168.130.25 RADIUS 81 Access-Accept id=76
+   18   0.004848    127.0.0.1 → 127.0.0.1    RADIUS 76 Access-Accept id=152
+   19   0.004914 Tp-LinkT_00:b2:98 →              PPP CHAP 28 Success (MESSAGE='')
+   20   0.005045 Tp-LinkT_00:b2:98 →              PPP CCP 39 Configuration Request
+   21   0.005053 Tp-LinkT_00:b2:98 →              PPP IPCP 40 Configuration Request
+   22   0.005823 a2:aa:1b:7a:67:c3 →              PPP CCP 62 Configuration Request
+   23   0.005827 a2:aa:1b:7a:67:c3 →              PPP IPCP 62 Configuration Request
+   24   0.005852 a2:aa:1b:7a:67:c3 →              PPP IPV6CP 62 Configuration Request
+   25   0.005937 Tp-LinkT_00:b2:98 →              PPP CCP 39 Configuration Ack
+   26   0.005947 Tp-LinkT_00:b2:98 →              PPP IPCP 34 Configuration Nak
+   27   0.005950 Tp-LinkT_00:b2:98 →              PPP LCP 44 Protocol Reject
+   28   0.006174 a2:aa:1b:7a:67:c3 →              PPP CCP 62 Configuration Ack
+   29   0.006669 a2:aa:1b:7a:67:c3 →              PPP IPCP 62 Configuration Ack
+   30   0.007143 a2:aa:1b:7a:67:c3 →              PPP IPCP 62 Configuration Request
+   31   0.007242 Tp-LinkT_00:b2:98 →              PPP IPCP 40 Configuration Ack
+   32   0.007733    127.0.0.1 → 127.0.0.1    RADIUS 152 Accounting-Request id=153
+   33   0.008411    127.0.0.1 → 127.0.0.1    RADIUS 64 Accounting-Response id=153
+   34   1.014175 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Termination Request
+   35   1.014745    127.0.0.1 → 127.0.0.1    RADIUS 188 Accounting-Request id=154
+   36   1.015404    127.0.0.1 → 127.0.0.1    RADIUS 64 Accounting-Response id=154
+   37   1.016020 Tp-LinkT_00:b2:98 →              PPP LCP 28 Termination Ack
+|Time     | 127.0.0.1                             | 192.168.130.206                       |
+|         |                   | 192.168.130.25    |                   
+|0.003525 |         Access-Request id=15          |                   |RADIUS: Access-Request id=152
+|         |(58896)  ------------------>  (1812)   |                   |
+|0.004174 |                   |         Access-Request id=76          |RADIUS: Access-Request id=76
+|         |                   |(42805)  ------------------>  (1812)   |
+|0.004551 |                   |         Access-Accept id=76           |RADIUS: Access-Accept id=76
+|         |                   |(42805)  <------------------  (1812)   |
+|0.004848 |         Access-Accept id=152          |                   |RADIUS: Access-Accept id=152
+|         |(1812)   ------------------>  (58896)  |                   |
+|0.007733 |         Accounting-Request i          |                   |RADIUS: Accounting-Request id=153
+|         |(44195)  ------------------>  (1813)   |                   |
+|0.008411 |         Accounting-Response           |                   |RADIUS: Accounting-Response id=153
+|         |(1813)   ------------------>  (44195)  |                   |
+|1.014745 |         Accounting-Request i          |                   |RADIUS: Accounting-Request id=154
+|         |(34176)  ------------------>  (1813)   |                   |
+|1.015404 |         Accounting-Response           |                   |RADIUS: Accounting-Response id=154
+|         |(1813)   ------------------>  (34176)  |                   |

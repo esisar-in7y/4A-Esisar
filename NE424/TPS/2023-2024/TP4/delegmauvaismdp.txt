@@ -1,0 +1,32 @@
+    1   0.000000 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Request
+    2   0.000333 Tp-LinkT_00:b2:98 →              PPP LCP 42 Configuration Request
+    3   0.000341 Tp-LinkT_00:b2:98 →              PPP LCP 38 Configuration Reject
+    4   0.000839 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Nak
+    5   0.001063 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Request
+    6   0.001064 Tp-LinkT_00:b2:98 →              PPP LCP 43 Configuration Request
+    7   0.001260 Tp-LinkT_00:b2:98 →              PPP LCP 34 Configuration Ack
+    8   0.001507 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Configuration Ack
+    9   0.001765 Tp-LinkT_00:b2:98 →              PPP LCP 32 Echo Request
+   10   0.001772 Tp-LinkT_00:b2:98 →              PPP CHAP 56 Challenge (NAME='strech', VALUE=0x2ecb6ec5db170e110d310a9bc57967205568b9006d)
+   11   0.001933 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Echo Request
+   12   0.002087 Tp-LinkT_00:b2:98 →              PPP LCP 32 Echo Reply
+   13   0.002168 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Echo Reply
+   14   0.002453 a2:aa:1b:7a:67:c3 →              PPP CHAP 62 Response (NAME='lepratf@prof.com', VALUE=0x7d383e35363a62b5b6f5a55a4cdd95f4)
+   15   0.003330    127.0.0.1 → 127.0.0.1    RADIUS 148 Access-Request id=156
+   16   0.003982 192.168.130.25 → 192.168.130.206 RADIUS 168 Access-Request id=220
+   17   1.005318 192.168.130.206 → 192.168.130.25 RADIUS 69 Access-Reject id=220
+   18   2.006375    127.0.0.1 → 127.0.0.1    RADIUS 64 Access-Reject id=156
+   19   2.006581 Tp-LinkT_00:b2:98 →              PPP CHAP 28 Failure (MESSAGE='')
+   20   2.006589 Tp-LinkT_00:b2:98 →              PPP LCP 49 Termination Request
+   21   2.008175 a2:aa:1b:7a:67:c3 →              PPP LCP 68 Termination Request
+   22   2.008184 a2:aa:1b:7a:67:c3 →              PPP LCP 62 Termination Ack
+|Time     | 127.0.0.1                             | 192.168.130.206                       |
+|         |                   | 192.168.130.25    |                   
+|0.003330 |         Access-Request id=15          |                   |RADIUS: Access-Request id=156
+|         |(52635)  ------------------>  (1812)   |                   |
+|0.003982 |                   |         Access-Request id=22          |RADIUS: Access-Request id=220
+|         |                   |(54524)  ------------------>  (1812)   |
+|1.005318 |                   |         Access-Reject id=220          |RADIUS: Access-Reject id=220
+|         |                   |(54524)  <------------------  (1812)   |
+|2.006375 |         Access-Reject id=156          |                   |RADIUS: Access-Reject id=156
+|         |(1812)   ------------------>  (52635)  |                   |
