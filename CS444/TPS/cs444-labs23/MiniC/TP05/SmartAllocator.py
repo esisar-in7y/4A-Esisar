@@ -27,19 +27,19 @@ class SmartAllocator(Allocator):
         # TODOx (lab5): replace_mem and replace_reg from TP04 do.
         # and now return the new list!
         numero_registre = 1
-        for arg in old_instr.args():
-            prev_arg=arg
-            if isinstance(arg, Temporary) :
-                loc = arg.get_alloced_loc()
-                if loc in GP_REGS:
-                    arg = arg.get_alloced_loc()
+        for argument in old_instr.args():
+            argument_precedent = argument
+            if isinstance(argument, Temporary):
+                emplacement = argument.get_alloced_loc()
+                if emplacement in GP_REGS:
+                    argument = argument.get_alloced_loc()
                 else:
-                    Sregistre = S[numero_registre]
+                    registre = S[numero_registre]
                     if old_instr.is_read_only() or numero_registre != 1:
-                        before.append(Instruction('ld', Sregistre, loc))
+                        before.append(Instruction('ld', registre, emplacement))
                     else:
-                        after.append(Instruction('sd', Sregistre, loc))
-                subst[prev_arg]=arg
+                        after.append(Instruction('sd', registre, emplacement))
+                subst[argument_precedent] = argument
                 numero_registre += 1
         instr = old_instr.substitute(subst)
         return before + [instr] + after
@@ -68,8 +68,6 @@ class SmartAllocator(Allocator):
         if self._debug_graphs:
             print("printing the conflict graph")
             self._igraph.print_dot(self._basename + "_conflicts.dot")
-        if self._debug:
-            self._liveness.print_gen_kill()
         # Smart Alloc via graph coloring
         self.smart_alloc(self._basename + "_colored.dot")
 
@@ -123,6 +121,7 @@ class SmartAllocator(Allocator):
         if self._debug_graphs:
             print("coloring = " + str(coloringreg))
             self._igraph.print_dot(outputname, coloringreg)
+        
         alloc_dict = {}
         
         for reg in self._fdata._pool._all_temps:
