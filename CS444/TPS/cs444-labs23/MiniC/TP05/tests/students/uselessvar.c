@@ -11,4 +11,4 @@ int main() {
 }
 
 // EXPECTED
-// 0
+// 1
